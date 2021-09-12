@@ -1,0 +1,101 @@
+
+.authorisation-background {
+  background-color: #141834;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-wrapper {
+  position: relative;
+  min-width: 745px;
+  min-height: 450px;
+  background: #FFFFFF;
+  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 7px;
+
+  &__leftside {
+    margin-left: 45px;
+    margin-top: 40px;
+  }
+
+  &__rightside {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__logo {
+    margin-bottom: 40px;
+    width: 82px;
+    height: 25px;
+    margin-top: 40px;
+  }
+
+  &__text {
+    margin-bottom: 20px;
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #141834;
+  }
+
+  &__input {
+    margin-bottom: 10px;
+  }
+
+  &__button {
+    width: 280px;
+    margin-top: 20px;
+  }
+
+}
+
+
+.input-auth {
+  padding: 18px 22px 18px 25px;
+  width: 280px;
+  height: 56px;
+  border: 1px solid #E8E8EB;
+  border-radius: 5px;
+
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__input {
+    width: 80%;
+    height: 20px;
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #5D5F73;
+  }
+
+  &__icon {
+
+  }
+
+
+}
+
+.button {
+  border-radius: 7px;
+  padding: 14px;
+
+  &_orn{
+    background-color: #EA5616;
+  }
+}
+
