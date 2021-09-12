@@ -1,0 +1,88 @@
+
+.monthExpenses {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 35px;
+  padding-right: 35px;
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &:after {
+      content: '';
+      position: absolute;
+      height: 20px;
+      width: 2px;
+      top: 0px;
+    }
+  }
+
+  &__title {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #2C2D84;
+    margin-bottom: 10px;
+    &_orn{
+      color:#EA5616;
+    }
+  }
+
+  &__numbers{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+
+    color: #141834;
+    &_big {
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 44px;
+      color: #141834;
+    }
+
+    &_currency{
+      color: rgba(20, 24, 52, 0.4);
+    }
+  }
+
+  &__percent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:before{
+      position: relative;
+      left: -50%;
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #EA5616 ;
+    }
+  }
+
+  &__line {
+    background: rgba(20, 24, 52, 0.05);
+    border-radius: 27px;
+    width: 130px;
+    height: 10px;
+  }
+}
+
+
+
+
+

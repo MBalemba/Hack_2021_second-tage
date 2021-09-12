@@ -33,7 +33,7 @@ function Input({type, ...props}) {
 
 const LoginPage = () => {
     return (
-        <div className={'authorisation-background'}>
+        <div className={'background background-authorisation'}>
 
 
             <div className="form-wrapper">

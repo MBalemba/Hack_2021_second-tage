@@ -1,12 +1,21 @@
 
-.authorisation-background {
-  background-color: #141834;
-  width: 100vw;
-  height: 100vh;
+.background {
+  min-width: 100vw;
+  min-height: 100vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &-authorisation{
+    background-color: #141834;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-home{
+    background-color: #E5E5E5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 
 .form-wrapper {

@@ -1,0 +1,36 @@
+.recommendedServices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 35px;
+  padding-right: 35px;
+
+
+  &__blockText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font-style: normal;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 5px;
+    /* identical to box height */
+
+  }
+
+  &__subtitle {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(255, 255, 255, 0.5);
+
+  }
+
+
+}
