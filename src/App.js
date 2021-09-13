@@ -7,6 +7,8 @@ import {LOGIN_ROUTE} from "./pagePath";
 
 
 function App() {
+
+    console.log(process.env.REACT_APP_API_URL)
   return (
       <BrowserRouter className="App">
         <Switch>

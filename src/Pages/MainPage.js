@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './MainPage.scss'
 import {Link} from "react-router-dom";
 import Logo from "../Components/common/HomePage/svg/Logo";
 import MonthExpenses from "../Components/HomePage/MonthExpenses";
 import Offer from "../Components/HomePage/Offer";
+import WeekExpenses from "../Components/HomePage/WeekExpenses";
+import {Context} from "../index";
 
 
 function Paper(props) {
@@ -21,6 +23,7 @@ function Paper(props) {
 
 const MainPage = () => {
 
+    const {login} = useContext(Context)
 
     return (
         <div className={'background background-home'}>
@@ -63,6 +66,28 @@ const MainPage = () => {
                         </div>
                     </div>
                 </div>
+
+
+                <div className="section__2 section">
+                    <div className={'section__2_left '}>
+                        <div className={'paper paper_white'}>
+                            <div className="paper__content">
+                                <p className={'paper__title'}>График расхода по дням</p>
+                                <WeekExpenses/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={'section__2_right'}>
+                        <div className={'paper paper_dark'}>
+                            <div className="paper__content">
+                                <p className={'paper__title'}></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 {/*
                 <div className="section_2 section">
                     <div className={'section__left'}>

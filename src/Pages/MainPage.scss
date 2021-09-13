@@ -64,10 +64,14 @@
     font-size: 20px;
     line-height: 22px;
     color: #141834;
+    margin-bottom: 10px;
   }
 
   &__content {
-
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    padding: 30px;
   }
 }
 
@@ -75,6 +79,7 @@
   min-width: 1280px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
   &__1{
     &_left{
       width: 783px;
@@ -85,4 +90,16 @@
       height: 130px;
     }
   }
+
+  &__2{
+    &_left{
+      width: 395px;
+      height: 382px;
+    }
+    &_right{
+      width: 870px;
+      height: 382px;
+    }
+  }
+
 }

@@ -1,0 +1,72 @@
+.weekExpenses{
+  &__graphic{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  &__items{
+    width: 100%;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__itemCategory{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 35px;
+  }
+
+  &__item  {
+    background-color: rgba(20, 24, 52, 0.05);
+    height: 100%;
+    border-radius:  25px;
+    min-width: 45%;
+  }
+
+
+
+
+  &__weekDays{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(20, 24, 52, 0.25);
+  }
+
+  &__weekDay{
+    width: 35px;
+
+    text-align: center;
+  }
+
+  &__dataBlock{
+    width: 100%;
+    margin-top: 20px;
+  }
+  &__data{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height, or 122% */
+
+
+    color: #EA5616;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  }
+
+  &__price {
+
+  }
+
+
+
+}
