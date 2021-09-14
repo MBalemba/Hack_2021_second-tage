@@ -2,7 +2,8 @@
 .monthExpenses {
   display: flex;
   justify-content: space-between;
-
+  position: relative;
+  bottom: 0.4rem;
   &__card {
     position: relative;
     display: flex;
@@ -19,7 +20,11 @@
 
   &__title {
     font-family: Gilroy;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-style: normal;
+    max-width: 130px;
+    max-height: 21px;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
@@ -27,6 +32,9 @@
     margin-bottom: 10px;
     &_orn{
       color:#EA5616;
+      overflow: auto;
+      max-height: none;
+      max-width: none;
     }
   }
 

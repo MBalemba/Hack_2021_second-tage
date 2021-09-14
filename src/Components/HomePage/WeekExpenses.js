@@ -75,7 +75,7 @@ const WeekExpenses = observer(() => {
                         <div className={'tooltip__tooltipContent'}>
                             <div className={'tooltip__tooltipInfo'}>
                                 <PSc color={'rgba(20, 24, 52, 0.5);'} >
-                                    Средняя сумма
+                                    Средний расход
                                 </PSc>
                                 <p  className={'tooltip__tooltipInfo_price'}>
                                     {(sumObj.averageSum).toLocaleString()}
@@ -84,8 +84,8 @@ const WeekExpenses = observer(() => {
                                 </p>
                             </div>
                             <div className={'tooltip__tooltipInfo'}>
-                                <PSc color={sumObj.averageSum*100/maxPrice< sumObj.currentSum*100/maxPrice? '#2C2D84;': '#EA5616;'}>
-                                    Текущая сумма
+                                <PSc color={sumObj.averageSum*100/maxPrice< sumObj.currentSum*100/maxPrice?'#EA5616'  : '#2C2D84'}>
+                                    Сумма расхода
                                 </PSc>
                                 <p  className={'tooltip__tooltipInfo_price'}>
                                     {(sumObj.currentSum).toLocaleString()}
@@ -106,7 +106,7 @@ const WeekExpenses = observer(() => {
             </div>
             <div className="weekExpenses__price">
                 <p>
-                    {(26091).toLocaleString()}
+                    {(homePage.WeekExpense).toLocaleString()}
                     &nbsp;
                     <span className={'weekExpenses__price_span'}>₽</span>
                 </p>

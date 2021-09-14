@@ -9,7 +9,32 @@ class ApexChat extends React.Component {
 
     constructor(props) {
         super(props);
+        let custom = function ({series, seriesIndex, dataPointIndex, w}) {
+            console.log('dataPointIndex: ', dataPointIndex)
+            console.log('series: ', series)
+            console.log('seriesIndex: ', seriesIndex)
+            console.log('w', w)
 
+            let data = this.props.dateData[dataPointIndex].data
+
+            return `<div class='tooltip monthChart__tooltip'>
+                            <div class='tooltip__tooltipContent'>
+                                <div class='tooltip__tooltipInfo'>
+                                    <p class='tooltip__tooltipInfo_price'>
+                                        ${series[0][dataPointIndex]}
+                                        <span class='tooltip__tooltipInfo_span'>₽</span>
+                                    </p>                           
+                                    <p>
+                                        ${data}
+                                    </p>
+                                    
+                                </div>
+                            </div>   
+                        </div>
+                        `
+        }
+
+        custom = custom.bind(this)
         this.state = {
 
             series: [{
@@ -107,26 +132,7 @@ class ApexChat extends React.Component {
                     enabled: true,
                     enabledOnSeries: undefined,
                     shared: true,
-                    custom: function ({series, seriesIndex, dataPointIndex, w}) {
-                        console.log('dataPointIndex: ', dataPointIndex)
-                        console.log('series: ', series)
-                        console.log('seriesIndex: ', seriesIndex)
-                        return `<div class='tooltip monthChart__tooltip'>
-                            <div class='tooltip__tooltipContent'>
-                                <div class='tooltip__tooltipInfo'>
-                                    <p class='tooltip__tooltipInfo_price'>
-                                        ${series[0][dataPointIndex]}
-                                        <span class='tooltip__tooltipInfo_span'>₽</span>
-                                    </p>                           
-                                    <p>
-                                        ПТ, 13.09.2021
-                                    </p>
-                                    
-                                </div>
-                            </div>   
-                        </div>
-                        `
-                    },
+                    custom: custom,
                     theme: false,
                     style: {
                         fontSize: '12px',
@@ -141,6 +147,27 @@ class ApexChat extends React.Component {
 
 
 
+        }
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        debugger
+        console.log(this.state)
+        if(prevProps.dateData.length !== this.props.dateData.length){
+            const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])
+
+            this.setState({
+                ...this.state,
+                series: [{
+                    name: this.state.series.name,
+                    data: arr,
+                    store: [...this.props.dateData]
+                }]
+            })
         }
     }
 
@@ -170,7 +197,6 @@ const MonthChart = observer(() => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    debugger
                     getData()
                 }).catch(() => {
 
@@ -184,7 +210,7 @@ const MonthChart = observer(() => {
 
     return (
         <div>
-            <ApexChat/>
+            <ApexChat dateData={homePage?.ExpensesByMonth} />
 
         </div>
     );

@@ -24,6 +24,11 @@ export const getExpensesByMonth = async () => {
     return response
 }
 
+export const getTopThreeMonthly = async () => {
+    const response = await $authHost.get('/transactions/monthlyExpensesAndTopThreeCategories')
+    return response
+}
+
 
 export const refresh = async () => {
     const response = await $authHostRefresh.post('refreshToken')

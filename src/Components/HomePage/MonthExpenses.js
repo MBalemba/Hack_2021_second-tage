@@ -1,7 +1,31 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import './Monthexpenses.scss'
+import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
 
-const MonthExpenses = () => {
+const MonthExpenses = observer(() => {
+
+    const {homePage, login} = useContext(Context)
+
+    useEffect(() => {
+        debugger
+        const getData = () => homePage.topThreeMonthly()
+
+        getData()
+            .then(() => {
+
+            })
+            .catch((status) => {
+                login.checkStatus(status).then(() => {
+                    // debugger
+                    getData()
+                }).catch(() => {
+
+                })
+            })
+
+    }, [])
+
     return (
         <div className={'monthExpenses'}>
             <div className={'monthExpenses__card'}>
@@ -9,78 +33,38 @@ const MonthExpenses = () => {
                     Траты за месяц
                 </p>
                 <p className={'monthExpenses__price monthExpenses__price_big'}>
-                    81 827
+                    {homePage.MonthExpense.toLocaleString()}
                     <span> ₽</span>
                 </p>
 
             </div>
-            <div className={'monthExpenses__card'}>
-                <p className={'monthExpenses__title'}>
-                    Супермаркеты
-                </p>
-                <div className={'monthExpenses__numbers'}>
-                    <p className={'monthExpenses__price'}>
-                        81 827
-                        <span className={'monthExpenses__price_currency'}>&nbsp;₽</span>
-                    </p>
-                     <p className={'monthExpenses__percent'}>
-                         49%
-                     </p>
 
-                </div>
+            {homePage.TopThreeMonth.map((el, index) =>
+                <div key={el.category} className={'monthExpenses__card'}>
+                    <p className={'monthExpenses__title'}>
+                        {el.category}
+                    </p>
+                    <div className={'monthExpenses__numbers'}>
+                        <p className={'monthExpenses__price'}>
+                            {(Number(el.price)).toLocaleString()}
+                            <span className={'monthExpenses__price_currency'}>&nbsp;₽</span>
+                        </p>
+                        <p className={'monthExpenses__percent'}>
+                            {el.percent} %
+                        </p>
+
+                    </div>
 
                     <div className={'monthExpenses__line'}>
                         <div className={'monthExpenses__line'} style={{position: 'absolute', left: '0', width: '49%', backgroundColor: '#EA5616'}} >
                         </div>
                     </div>
 
-            </div>
-
-            <div className={'monthExpenses__card'}>
-                <p className={'monthExpenses__title'}>
-                    Супермаркеты
-                </p>
-                <div className={'monthExpenses__numbers'}>
-                    <p className={'monthExpenses__price'}>
-                        81 827
-                        <span className={'monthExpenses__price_currency'}>&nbsp;₽</span>
-                    </p>
-                    <p className={'monthExpenses__percent'}>
-                        49%
-                    </p>
-
                 </div>
+            )}
 
-                <div className={'monthExpenses__line'}>
-                    <div className={'monthExpenses__line'} style={{position: 'absolute', left: '0', width: '49%', backgroundColor: '#EA5616'}} >
-                    </div>
-                </div>
-
-            </div>
-
-            <div className={'monthExpenses__card'}>
-                <p className={'monthExpenses__title'}>
-                    Супермаркеты
-                </p>
-                <div className={'monthExpenses__numbers'}>
-                    <p className={'monthExpenses__price'}>
-                        81 827
-                        <span className={'monthExpenses__price_currency'}>&nbsp;₽</span>
-                    </p>
-                    <p className={'monthExpenses__percent'}>
-                        49%
-                    </p>
-
-                </div>
-
-                <div className={'monthExpenses__line'}>
-                    <div className={'monthExpenses__line'} style={{position: 'absolute', left: '0', width: '49%', backgroundColor: '#EA5616'}} >
-                    </div>
-                </div>
-
-            </div>
         </div>
     );
-};
+});
 
 export default MonthExpenses;
