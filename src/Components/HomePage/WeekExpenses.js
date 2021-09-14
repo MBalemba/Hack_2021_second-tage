@@ -41,7 +41,7 @@ const WeekExpenses = observer(() => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    debugger
+                    // debugger
                     getData()
                 }).catch(() => {
 

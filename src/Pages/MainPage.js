@@ -8,6 +8,7 @@ import WeekExpenses from "../Components/HomePage/WeekExpenses";
 import {Context} from "../index";
 import ReactApexChart from "react-apexcharts";
 import MonthChart from "../Components/HomePage/MonthChart";
+import Radar from "../Components/HomePage/Radar";
 
 
 function Paper(props) {
@@ -179,37 +180,37 @@ class ApexChart extends React.Component {
                         </div>
                     </div>
 
-                    {/*
-                <div className="section_2 section">
-                    <div className={'section__left'}>
-                        <Paper title={'График расходов по дням'}>
-                            {
-                                ()=>(
-                                    <div>
-                                        dssad
-                                    </div>
-                                )
-                            }
-                        </Paper>
 
-                    </div>
+                    <div className="section__3 section">
+                        <div className={'section__3_left '}>
+                            <div className={'paper paper_white'}>
+                                <div className="paper__content">
+                                    <p className={'paper__title '}>Диаграмма недельных расходов
+                                        по категориям</p>
+                                    <Radar/>
+                                </div>
 
-                    <div className={'section__right'}>
-                        <Paper title={'График расходов за месяц'}>
-                            {
-                                ()=>(
-                                    <div>
+                            </div>
+                        </div>
 
-                                    </div>
-                                )
-                            }
-                        </Paper>
+                        <div className={'section__3_middle'}>
+                            <div className={'paper paper_white'}>
+                                <div className="paper__content">
+                                    <p className={'paper__title '}>Диаграмма недельных расходов
+                                        по категориям</p>
 
-                    </div>
-                </div>*/}
+                                </div>
+                            </div>
+                        </div>
 
-                    <div className="section_3 section">
-
+                        <div className={'section__3_right'}>
+                            <div className={'paper paper_white'}>
+                                <div className="paper__content">
+                                    <p className={'paper__title '}>Топ расходов за месяц</p>
+                                        <PieChart/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

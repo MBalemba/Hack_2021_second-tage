@@ -30,14 +30,12 @@ export default class LoginStore {
         return refresh()
             .then((response)=> {
                 this._isAuthUser = true
-                debugger
                 localStorage.setItem('token', response.headers.jwtoken)
                 localStorage.setItem('RefreshToken', response.headers.refreshtoken)
                 return Promise.resolve()
             })
             .catch((error)=>{
                 this._isAuthUser = false
-                debugger
                 localStorage.removeItem('token')
                 localStorage.removeItem('RefreshToken')
                 this._isAuthUser = false
@@ -48,7 +46,7 @@ export default class LoginStore {
 
     checkStatus(status) {
 
-        debugger
+
         if(status===468){
             return this.doRefresh()
         }

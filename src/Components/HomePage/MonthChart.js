@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import ReactApexChart from "react-apexcharts";
 import './MonthChart.scss'
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 
 class ApexChat extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -13,16 +16,35 @@ class ApexChat extends React.Component {
                 name: "Desktops",
                 data: [[1, 34000], [2, 5400], [3, 23000], [4, 43000], [5, 34000],
                     [6, 34000], [7, 5400], [8, 2300], [9, 43000], [10, 34000],
-                    [11, 34000], [12, 5400], [13, 2300], [14, 43000], [15, 34000]]
+                    [11, 34000], [12, 5400], [13, 2300], [14, 43000], [15, 34000],
+                    [16, 34000], [17, 5400], [18, 23000], [19, 43000], [20, 34000],
+                    [21, 34000], [22, 5400], [23, 2300], [24, 43000], [25, 34000],
+                    [26, 34000], [27, 5400], [28, 2300], [29, 43000], [30, 34000]]
             }],
+            fill: {
+                type: 'solid',
+                colors: ['#1A73E8', '#B32824'],
+            },
             options: {
                 chart: {
+                    fontFamily: 'Gilroy',
+                    fontSize: '14px',
                     height: 350,
                     type: 'line',
                     zoom: {
                         enabled: false
-                    }
+                    },
+                    toolbar: {
+                        show: false
+                    },
                 },
+
+
+                legend: {
+                    show: false,
+                },
+                colors: ['#2C2D84'],
+
                 dataLabels: {
                     enabled: false
                 },
@@ -33,21 +55,54 @@ class ApexChat extends React.Component {
                     text: '',
                     align: 'left'
                 },
-                grid: {
-                    row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
+
+                yaxis: {
+                    tickAmount: 3,
+                    seriesName: 'asd',
+                    labels: {
+                        show: true,
+                        formatter: (value) => {
+                            return value + ' ₽'
+                        },
+                        style: {
+                            colors: ['rgba(20, 24, 52, 0.4)'],
+                            fontSize: '14px',
+                            fontFamily: 'Gilroy',
+                            fontWeight: 600,
+                            cssClass: 'apexcharts-yaxis-label',
+                        },
                     },
                 },
+
+
                 xaxis: {
                     type: 'category',
                     // tickPlacement: 'between',
                     categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
                     tickAmount: 6,
                     max: 31,
+                    tooltip: {
+                        enabled: false,
+                    },
+                    labels: {
+                        show: true,
+                        style: {
+                            colors: 'rgba(20, 24, 52, 0.4)',
+                            fontSize: '14px',
+                            fontFamily: 'Gilroy',
+                            fontWeight: 600,
+                            cssClass: 'apexcharts-yaxis-label',
+                        },
+                    },
 
 
                 },
+
+                grid: {
+                    show: true,
+                    borderColor: 'rgba(20, 24, 52, 0.4)'
+                },
+
                 tooltip: {
                     enabled: true,
                     enabledOnSeries: undefined,
@@ -63,8 +118,8 @@ class ApexChat extends React.Component {
                                         ${series[0][dataPointIndex]}
                                         <span class='tooltip__tooltipInfo_span'>₽</span>
                                     </p>                           
-                                    <p color={'rgba(20, 24, 52, 0.5);'} >
-                                        
+                                    <p>
+                                        ПТ, 13.09.2021
                                     </p>
                                     
                                 </div>
@@ -81,7 +136,9 @@ class ApexChat extends React.Component {
                 },
 
 
-            }
+            },
+
+
 
 
         }
@@ -102,12 +159,35 @@ class ApexChat extends React.Component {
 }
 
 
-const MonthChart = () => {
+const MonthChart = observer(() => {
+    const {homePage, login} = useContext(Context)
+    useEffect(() => {
+        const getData = () => homePage.expensesByMonth()
+
+        getData()
+            .then(() => {
+
+            })
+            .catch((status) => {
+                login.checkStatus(status).then(() => {
+                    debugger
+                    getData()
+                }).catch(() => {
+
+                })
+            })
+    }, [])
+
+    useEffect(() => {
+        console.log(homePage?.ExpensesByMonth)
+    }, [homePage.ExpensesByMonth])
+
     return (
         <div>
             <ApexChat/>
+
         </div>
     );
-};
+});
 
 export default MonthChart;
