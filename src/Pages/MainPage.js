@@ -9,6 +9,8 @@ import {Context} from "../index";
 import ReactApexChart from "react-apexcharts";
 import MonthChart from "../Components/HomePage/MonthChart";
 import Radar from "../Components/HomePage/Radar";
+import PieChart from "../Components/HomePage/PieChart";
+import HistoreOperation from "../Components/HomePage/HistoreOperation";
 
 
 function Paper(props) {
@@ -198,7 +200,7 @@ class ApexChart extends React.Component {
                                 <div className="paper__content">
                                     <p className={'paper__title '}>Диаграмма недельных расходов
                                         по категориям</p>
-
+                                    <HistoreOperation />
                                 </div>
                             </div>
                         </div>
@@ -206,7 +208,7 @@ class ApexChart extends React.Component {
                         <div className={'section__3_right'}>
                             <div className={'paper paper_white'}>
                                 <div className="paper__content">
-                                    <p className={'paper__title '}>Топ расходов за месяц</p>
+                                    <p className={'paper__title '}>История операций</p>
                                         <PieChart/>
                                 </div>
                             </div>
