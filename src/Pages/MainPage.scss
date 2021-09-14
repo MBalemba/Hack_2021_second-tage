@@ -101,5 +101,39 @@
       height: 382px;
     }
   }
-
 }
+
+
+.tooltip{
+  opacity: 0.9;
+  width: 174px;
+  height:124px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  padding: 15px 20px 5px;
+  border-radius: 10px;
+
+  &__tooltipContent{
+
+  }
+
+  &__tooltipInfo{
+    margin-bottom: 5px;
+
+    &_price{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      text-align: right;
+      color: #141834;
+      text-align: left;
+
+    }
+
+    &_span{
+      color: rgba(20, 24, 52, 0.4);
+    }
+  }
+}
+

@@ -21,7 +21,7 @@ export const check = async () => {
     return response
 }*/
 
-export const getExpectedDay = async () => {
+export const  getExpectedDay = async () => {
     const response = await $authHost.get('/transactions/expensesByDay')
     return response
 }
