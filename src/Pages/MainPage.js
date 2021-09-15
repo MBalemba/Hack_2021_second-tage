@@ -198,8 +198,7 @@ class ApexChart extends React.Component {
                         <div className={'section__3_middle'}>
                             <div className={'paper paper_white'}>
                                 <div className="paper__content">
-                                    <p className={'paper__title '}>Диаграмма недельных расходов
-                                        по категориям</p>
+                                    <p className={'paper__title '}>История операций</p>
                                     <HistoreOperation />
                                 </div>
                             </div>
@@ -208,7 +207,7 @@ class ApexChart extends React.Component {
                         <div className={'section__3_right'}>
                             <div className={'paper paper_white'}>
                                 <div className="paper__content">
-                                    <p className={'paper__title '}>История операций</p>
+                                    <p className={'paper__title '}>Топ расходов за месяц</p>
                                         <PieChart/>
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ const Diagram = styled.div`
   min-width: 40%;
 `
 
-const PSc =  styled.p`
+export const PSc =  styled.p`
   color: ${({color})=>color};
   font-style: normal;
   font-weight: 600;
@@ -32,7 +32,7 @@ const WeekExpenses = observer(() => {
     const [sumObj, setSumObj] = useState({averageSum: 0,currentSum: 0})
 
     useEffect(() => {
-        debugger
+
         const getData = () => homePage.getWeekExpenses()
 
         getData()

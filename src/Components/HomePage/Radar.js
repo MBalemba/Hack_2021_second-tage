@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import ReactApexChart from "react-apexcharts";
 import './Radar.scss'
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 class ApexChat extends React.Component {
 
@@ -11,10 +13,10 @@ class ApexChat extends React.Component {
 
             series: [{
                 name: 'Средние показатели за месяц',
-                data: [80, 50, 30, 40, 100, 20, 22],
+                data: [80, 50, 30],
             }, {
                 name: 'Текущие показатели',
-                data: [20, 30, 40, 80, 20, 80, 22],
+                data: [20, 30, 40],
             }],
 
 
@@ -108,16 +110,47 @@ class ApexChat extends React.Component {
                     opacity: 0.1
                 },
                 xaxis: {
-                    categories: ['Развлечения', 'Комунальные услуги ', 'Супермаркеты', 'Рестораны', 'Переводы', 'Одежда', 'Транспорт']
+
+                    categories: ['Развлечения', 'Комунальные услуги ', 'Супермаркеты']
+                },
+
+                yaxis:{
+                    show: false,
+                    tickAmount: 6,
                 },
                 zoom: {
-                    enabled: true,},
+                    enabled: true,
+                },
             },
 
 
         };
     }
 
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.data.monthlyAverages.length !== this.props.data.monthlyAverages.length) {
+
+            const avrMas = this.props.data.monthlyAverages.map(el => el.summary)
+            const curMas = this.props.data.currentIndicators.map(el => el.summary)
+            const categoryMas = this.props.data.monthlyAverages.map(el => el.category)
+
+            this.setState({
+                series: [{
+                    name: 'Средние показатели за месяц',
+                    data: avrMas,
+                }, {
+                    name: 'Текущие показатели',
+                    data: curMas,
+                }],
+                options: {
+                    xaxis: {
+                        categories: categoryMas
+                    }
+                },
+            })
+        }
+    }
 
     render() {
         return (
@@ -133,10 +166,27 @@ class ApexChat extends React.Component {
 }
 
 
-const Radar = () => {
+const Radar = observer(() => {
+    const {homePage, login} = useContext(Context)
+    useEffect(() => {
+        const getData = () => homePage.weekGroupExpenses()
+
+        getData()
+            .then(() => {
+
+            })
+            .catch((status) => {
+                login.checkStatus(status).then(() => {
+                    getData()
+                }).catch(() => {
+
+                })
+            })
+    }, [])
+
     return (
-        <ApexChat/>
+        <ApexChat data={homePage.RadarData}/>
     );
-};
+});
 
 export default Radar;

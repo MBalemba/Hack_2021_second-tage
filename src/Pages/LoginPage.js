@@ -51,7 +51,7 @@ const LoginPage = observer( function() {
     }
 
     const handleSubmit = (e) =>{
-        debugger
+
         e.preventDefault()
         console.log(e)
 

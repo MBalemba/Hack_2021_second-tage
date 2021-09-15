@@ -1,0 +1,148 @@
+.history {
+  margin-top: 25px;
+  position: relative;
+
+  &__toggle {
+
+  }
+
+  &__content {
+  }
+
+  &__menu {
+    position: relative;
+    height: 600px;
+    max-height: 662px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+      background-color: #f9f9fd;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background:  #E5E5E5;
+    }
+    scrollbar-color: rgba(0,0,0,0);
+
+  }
+
+  &__timeBlock{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+
+  &__time {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 22px;
+    color: rgba(20, 24, 52, 0.25);
+  }
+
+
+  &__transArr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__transItemWrapper{
+    margin-bottom: 13px;
+  }
+
+  &__transItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    &_left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &_right {
+    }
+  }
+
+
+  &__textBlock {
+
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+
+
+    color: #141834;
+    &_left {
+      display: flex;
+      margin-left: 15px;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    &_right {
+      margin-right: 15px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  &__text {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    &_grey {
+      color: rgba(100, 104, 114, 0.7);
+    }
+
+    &_uppercase {
+      text-transform: uppercase;
+    }
+  }
+
+  &__hr{
+    height: 2px;
+    background: rgba(20, 24, 52, 0.05);
+    transform: matrix(1, 0, 0, -1, 0, 0);
+  }
+
+  &__buttonWrapperWrap{
+    position: relative;
+  }
+
+  &__buttonWrapper {
+    position: absolute;
+    width: 100%;
+    bottom: -0px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.7682423311121324) 0%, rgba(254,254,254,1) 100%, rgba(251,251,251,0.6702031154258579) 100%);
+  }
+  &__button {
+    width: 100%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    color: #FFFFFF;
+  }
+}

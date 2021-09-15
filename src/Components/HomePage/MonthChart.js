@@ -177,7 +177,7 @@ class ApexChat extends React.Component {
 
 
             <div className="MonthChart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={260}/>
+                <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={260}/>
             </div>
 
 

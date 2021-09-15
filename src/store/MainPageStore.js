@@ -1,5 +1,12 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {getExpectedDay, getExpensesByMonth, getTopThreeMonthly, login} from "../http/UserApi";
+import {
+    getExpectedDay,
+    getExpensesByMonth, getHistoryExpenses,
+    getTopExpensesForTheMonth,
+    getTopThreeMonthly,
+    getWeekGroup,
+    login
+} from "../http/UserApi";
 import date from 'date-and-time';
 
 
@@ -14,18 +21,26 @@ export default class MainPageStore {
         this._monthExpenses = []
         this._weekExpenses = {averageAmount:[], currentAmount: [], maxAmount: 0}
         this._topThree = {list: [], wholeSum: 0}
+        this._radarData = {currentIndicators: [], monthlyAverages: []}
+
+
+        this._historyData = []
+        this._requestHistoreCount = 0
+
+
+
+        this._pieData = []
+
         makeAutoObservable(this)
     }
 
 
     topThreeMonthly() {
         return getTopThreeMonthly().then((response)=>{
-
-            console.log('TopThreeMonthly', response)
             this._topThree = {...response.data}
             return Promise.resolve()
         }).catch(({response})=>{
-            debugger
+
             return Promise.reject(response.data.status)
         })
     }
@@ -41,25 +56,108 @@ export default class MainPageStore {
 
     expensesByMonth(){
         return getExpensesByMonth().then((response) => {
-            debugger
-            console.log('ExpensesByMonth', response)
             this._monthExpenses = response.data
             return Promise.resolve()
         }).catch(({response}) => {
-            debugger
+
             console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
 
     weekGroupExpenses(){
-        return getExpensesByMonth().then((response) => {
-            debugger
-            console.log('ExpensesByMonth', response)
-            this._monthExpenses = {...response.data}
+        return getWeekGroup().then((response) => {
+            console.log('_radarData', response)
+            this._radarData = {...response.data}
             return Promise.resolve()
         }).catch(({response}) => {
+
+            console.log('ExpensesByMonthError', response)
+            return Promise.reject(response.data.status)
+        })
+    }
+
+    doArray = (argMas) =>{
+        const arr = []
+        let i = 0
+
+        argMas.forEach((el, index)=>{
             debugger
+
+            if(i===0){
+
+                arr.push({
+                    date: el.date,
+                    info: [{
+                        currency: el.currency,
+                        description: el.info,
+                        sum: el.sum,
+                    }]
+                })
+                i++;
+            } else {
+                if(arr[i-1].date === el.date){
+                    arr[i-1] = {
+                        date: el.date,
+                        info: [...arr[i-1].info,{
+                            currency: el.currency,
+                            description: el.info,
+                            sum: el.sum,
+                        }]
+                    }
+                } else {
+                    arr.push({
+                        date: el.date,
+                        info: [{
+                            currency: el.currency,
+                            description: el.info,
+                            sum: el.sum,
+                        }]
+                    })
+                    i++
+                }
+            }
+
+
+
+
+
+        })
+
+        debugger
+
+
+        return arr
+
+    }
+
+    historyExpenses(){
+
+
+        return getHistoryExpenses().then((response) => {
+
+
+
+            this._historyData = [...this._historyData, ...this.doArray(response.data)]
+            this._requestHistoreCount++
+            return Promise.resolve()
+
+        }).catch(({response}) => {
+
+            console.log('ExpensesByMonthError', response)
+            return Promise.reject(response.data.status)
+        })
+    }
+
+
+    topExpensesForTheMonth(){
+        return getTopExpensesForTheMonth().then((response) => {
+
+            console.log('pieData ', response)
+            this._pieData = [...response.data]
+            return Promise.resolve()
+        }).catch(({response}) => {
+
             console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
@@ -93,6 +191,28 @@ export default class MainPageStore {
         })
 
         return + count
+    }
+
+    get RadarData(){
+        return  toJS(this._radarData)
+    }
+
+    get HistoryData(){
+        return toJS(this._historyData)
+    }
+
+    get PieData() {
+        return toJS(this._pieData)
+    }
+
+    get PieDataSum(){
+
+        let arr = this._pieData.map(el=>el.summary)
+
+        const sum = arr.reduce((previousValue, currentValue) => previousValue + currentValue)
+
+        return sum
+
     }
 
 }
