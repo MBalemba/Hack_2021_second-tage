@@ -9,6 +9,10 @@ export default class LoginStore {
         makeAutoObservable(this)
     }
 
+    get IsAuth(){
+        return this._isAuthUser
+    }
+
     doAutorizate(name, password) {
         return login(name, password)
             .then((response) => {
@@ -41,6 +45,13 @@ export default class LoginStore {
                 this._isAuthUser = false
                 return Promise.reject()
             })
+    }
+
+    out(){
+        this._isAuthUser = false
+        localStorage.removeItem('token')
+        localStorage.removeItem('RefreshToken')
+        this._isAuthUser = false
     }
 
 

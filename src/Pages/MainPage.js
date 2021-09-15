@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import './MainPage.scss'
-import {Link} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import Logo from "../Components/common/HomePage/svg/Logo";
 import MonthExpenses from "../Components/HomePage/MonthExpenses";
 import Offer from "../Components/HomePage/Offer";
@@ -11,6 +11,8 @@ import MonthChart from "../Components/HomePage/MonthChart";
 import Radar from "../Components/HomePage/Radar";
 import PieChart from "../Components/HomePage/PieChart";
 import HistoreOperation from "../Components/HomePage/HistoreOperation";
+import {LOGIN_ROUTE} from "../pagePath";
+import {observer} from "mobx-react-lite";
 
 
 function Paper(props) {
@@ -26,98 +28,15 @@ function Paper(props) {
     );
 }
 
-class ApexChart extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-            series: [{
-                name: "Desktops",
-                data: [[1, 34000], [2, 5400], [3, 23000], [4, 43000], [5, 34000],
-                    [6, 34000], [7, 5400], [8, 2300], [9, 43000], [10, 34000],
-                    [25, 43], [31, 34],]
-            }],
-            options: {
-                chart: {
-                    height: 350,
-                    type: 'line',
-                    zoom: {
-                        enabled: false
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'straight'
-                },
-                title: {
-                    text: 'Product Trends by Month',
-                    align: 'left'
-                },
-                grid: {
-                    row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                    },
-                },
-                xaxis: {
-                    type: 'category',
-                    // tickPlacement: 'between',
-                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-                    tickAmount: 6,
 
 
-                },
-                tooltip: {
-                    enabled: true,
-                    enabledOnSeries: undefined,
-                    shared: true,
-                    followCursor: true,
-                    custom: function({series, seriesIndex, dataPointIndex, w}) {
-                        console.log('dataPointIndex: ', dataPointIndex)
-                        return '<div class="arrow_box">' +
-                            "<span>" +
-                            ": " +
-                            series[seriesIndex][dataPointIndex] +
-                            "</span>" +
-                            "</div>"
-                    },
-                    fillSeriesColor: false,
-                    theme: false,
-                    style: {
-                        fontSize: '12px',
-                        fontFamily: 'Gilroy',
-                    },
-
-                },
-
-
-            }
-
-
-        }}
-
-
-        render()
-        {
-            return (
-
-
-                <div id="chart">
-                    <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={260}/>
-                </div>
-
-
-            );
-        }
-    }
-
-    const MainPage = () => {
-
+    const MainPage = observer(() => {
+        const history = useHistory()
         const {login} = useContext(Context)
 
+        if(!login.IsAuth){
+            return <Redirect to={'login'}/>
+        }
 
         return (
             <div className={'background background-home'}>
@@ -128,7 +47,9 @@ class ApexChart extends React.Component {
                             <p className={'topLogo__text'}>Анализ финансов</p>
                         </div>
 
-                        <Link className={'home-content__outLink'}>
+                        <Link onClick={()=>{
+                            login.out()
+                        }} className={'home-content__outLink'}>
                             Выход
                         </Link>
 
@@ -216,7 +137,7 @@ class ApexChart extends React.Component {
                 </div>
             </div>
         );
-    };
+    });
 
     export
     default

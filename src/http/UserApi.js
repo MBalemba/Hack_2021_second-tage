@@ -33,8 +33,8 @@ export const getWeekGroup = async () => {
     const response = await $authHost.get('/transactions/expensesPerWeekByCategory')
     return response
 }
-export const getHistoryExpenses = async () => {
-    const response = await $authHost.get('transactions/historyOfOperations')
+export const getHistoryExpenses = async (query='') => {
+    const response = await $authHost.get('transactions/historyOfOperations'+query)
     return response
 }
 

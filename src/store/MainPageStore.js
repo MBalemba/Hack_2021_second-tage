@@ -26,6 +26,8 @@ export default class MainPageStore {
 
         this._historyData = []
         this._requestHistoreCount = 0
+        this._maxHistory = null
+        this._isFetchingHistory = false
 
 
 
@@ -131,15 +133,29 @@ export default class MainPageStore {
 
     }
 
+    getQuery(){
+        let str = '';
+
+        str= '?page='+this._requestHistoreCount
+
+
+        return str
+    }
+
     historyExpenses(){
 
 
-        return getHistoryExpenses().then((response) => {
+        return getHistoryExpenses(this.getQuery()).then((response) => {
+            this._requestHistoreCount++
+            console.log('this._requestHistoreCount: ', this._requestHistoreCount)
 
+            if(response.data.length === 0){
+                this._maxHistory = this._requestHistoreCount
+                console.log('Максимальное значение поймано')
+            }
 
 
             this._historyData = [...this._historyData, ...this.doArray(response.data)]
-            this._requestHistoreCount++
             return Promise.resolve()
 
         }).catch(({response}) => {
@@ -200,6 +216,25 @@ export default class MainPageStore {
     get HistoryData(){
         return toJS(this._historyData)
     }
+
+    get HistoryCount(){
+        return this._requestHistoreCount
+    }
+
+    get HistoryMax(){
+        return this._maxHistory
+    }
+
+    get FetchingHistory(){
+        return this._isFetchingHistory
+    }
+
+
+
+    setFetchingHistory(bool) {
+        this._isFetchingHistory = bool
+    }
+
 
     get PieData() {
         return toJS(this._pieData)

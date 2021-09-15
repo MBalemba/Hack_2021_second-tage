@@ -13,7 +13,9 @@
     position: relative;
     height: 600px;
     max-height: 662px;
-    overflow-y: scroll;
+
+    overflow: scroll;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -144,5 +146,12 @@
     font-size: 14px;
     line-height: 22px;
     color: #FFFFFF;
+  }
+
+  &__spinner{
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    left: 0px;
+    bottom: 60px;
   }
 }

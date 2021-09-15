@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import img from "../assets/images/loginPage/sideImage.png";
 import LockIconInput from "../Components/common/LoginPage/svg/LockIconInput";
 import UserIconInput from "../Components/common/LoginPage/svg/UserIconInput";
@@ -6,6 +6,7 @@ import Logo from "../Components/common/LoginPage/svg/Logo";
 import {observer} from "mobx-react-lite";
 import {useContext} from "react";
 import {Context} from "../index";
+import {Redirect} from "react-router-dom";
 
 // import './../Styles.scss'
 
@@ -20,6 +21,7 @@ function Input({type, ...props}) {
             setPasswordHidden(!isPasswordHidden)
         }
     }
+
 
     return (
         <div className={'input-auth'}>
@@ -56,6 +58,16 @@ const LoginPage = observer( function() {
         console.log(e)
 
         login.doAutorizate(name,password )
+    }
+
+    useEffect(()=>{
+        login.doRefresh().then(()=>{})
+    }, [])
+
+
+
+    if(login.IsAuth){
+        return <Redirect to={'home'}/>
     }
 
     return (
