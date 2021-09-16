@@ -17,6 +17,8 @@ const SettingBar = observer(({homePage, login}) => {
     const [date_2, setDate_2] = useState('')
     const [error, setError] = useState({status: false, message: 'error'})
 
+    const[isChanging, setIsChanging] = useState(false)
+
     const handleClickSum = (e)=>{
         const element = e.target;
         element.selectionStart = element.value.length - 2;
@@ -89,28 +91,23 @@ const SettingBar = observer(({homePage, login}) => {
     }
 
     const handleChange_1 = (e) => {
-        if(giveValidateValue(e.target) === ''){
-            setSum_right('')
-        }
         setSum_left(giveValidateValue(e.target))
+        setIsChanging(true)
     }
 
 
     const handleChange_2 = (e) => {
         setSum_right(giveValidateValue(e.target))
+        setIsChanging(true)
     }
     const handleChange_3 = (e) => {
         console.log(e.target.value)
         setDate_1(e.target.value)
+        setIsChanging(true)
     }
     const handleChange_4 = (e) => {
         setDate_2(e.target.value)
-    }
-    const handleChange_5 = (e) => {
-
-    }
-    const handleChange_6 = (e) => {
-
+        setIsChanging(true)
     }
 
     return (
@@ -121,7 +118,23 @@ const SettingBar = observer(({homePage, login}) => {
                     <div className={'history__inputBlock'}>
                         <div className={'input history__input'}>
                             <div className={'input__wrapper'}>
-                                <input onBlur={()=>doRequest()}  placeholder={'От'} name={'sum_left'} onClick={handleClickSum} onChange={handleChange_1} value={sum_left} id={'price-start'}
+                                <input onBlur={(e)=>{
+                                    const value_left = Number(e.target.value.match(/\d*/gi).join(''))
+                                    const value_right = Number(sum_right.match(/\d*/gi).join(''))
+                                    debugger
+                                    if(value_left>value_right && value_right!=''){
+                                        setSum_right('')
+                                        setError({status: true, message: 'Сумма от должна быть меньше, чем сумма до'})
+
+                                        setTimeout(()=>{setError({status: false, message: 'Сумма от должна быть меньше, чем сумма после'})}, 3000)
+                                    } else{
+                                        debugger
+                                        if(isChanging){
+                                            doRequest()
+                                            setIsChanging(false)
+                                        }
+                                    }
+                                }}  placeholder={'От'} name={'sum_left'} onClick={handleClickSum} onChange={handleChange_1} value={sum_left} id={'price-start'}
                                        className={'input__input'}/>
                             </div>
                         </div>
@@ -137,7 +150,10 @@ const SettingBar = observer(({homePage, login}) => {
 
                                         setTimeout(()=>{setError({status: false, message: 'Сумма от должна быть меньше, чем сумма после'})}, 3000)
                                     } else{
-                                        doRequest()
+                                        if(isChanging){
+                                            doRequest()
+                                            setIsChanging(false)
+                                        }
                                     }
                                 }} placeholder={'До'} name={'sum_right'} onClick={handleClickSum}  onChange={handleChange_2} value={sum_right}
                                        className={'input__input'}/>
@@ -147,19 +163,29 @@ const SettingBar = observer(({homePage, login}) => {
                 </div>
 
                 <div className={'history__toolbar_element'}>
-                    <label className={'history__label'} htmlFor="date-start">Дата</label>
+                    <div className={'history__label'} htmlFor="date-start">Дата</div>
                     <div className={'history__inputBlock'}>
                         <div className={'input history__input'}>
-                            {date_1==='' && <label className={'labelDate'} htmlFor="date-start">Начало</label>}
+                            {date_1==='' && <div className={'labelDate'} htmlFor="date-start">Начало</div>}
                             <div className={'history__input_wrapper'}>
-                                <input onBlur={()=>doRequest()} onChange={handleChange_3} value={date_1} type="date" name={'date-start'} id={'date-start'} className={'inputDate'}/>
+                                <input onBlur={()=>{
+                                    if(isChanging){
+                                        doRequest()
+                                        setIsChanging(false)
+                                    }
+                                }} onChange={handleChange_3} value={date_1} type="date" name={'date-start'} id={'date-start'} className={'inputDate'}/>
                             </div>
                         </div>
                         <div className={'input history__input'}>
-                            {date_2==='' && <label className={'labelDate'} htmlFor="date-end">Конец</label>}
+                            {date_2==='' && <div className={'labelDate'} htmlFor="date-end">Конец</div>}
 
                             <div className={'history__input_wrapper'}>
-                                <input onBlur={()=>doRequest()} disabled={date_1===''} min={date_1} onChange={handleChange_4} value={date_2}  type="date" name={'date-end'} id={'date-end'} className={'inputDate'}/>
+                                <input onBlur={()=>{
+                                    if(isChanging){
+                                        doRequest()
+                                        setIsChanging(false)
+                                    }
+                                }} disabled={date_1===''} min={date_1} onChange={handleChange_4} value={date_2}  type="date" name={'date-end'} id={'date-end'} className={'inputDate'}/>
                             </div>
                         </div>
                     </div>
