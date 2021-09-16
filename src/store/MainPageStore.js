@@ -8,6 +8,7 @@ import {
     login
 } from "../http/UserApi";
 import date from 'date-and-time';
+import {useState} from "react";
 
 
 export const statusCheck = (status) => {
@@ -28,6 +29,9 @@ export default class MainPageStore {
         this._requestHistoreCount = 0
         this._maxHistory = null
         this._isFetchingHistory = false
+        this._query = ''
+        this._input = true
+        this._output = true
 
 
 
@@ -36,6 +40,21 @@ export default class MainPageStore {
         makeAutoObservable(this)
     }
 
+    setInput(bool){
+        this._input = bool
+    }
+
+    setOutput(bool){
+        this._output = bool
+    }
+
+    get Input(){
+        return this._input
+    }
+
+    get Output(){
+        return this._output
+    }
 
     topThreeMonthly() {
         return getTopThreeMonthly().then((response)=>{
@@ -84,7 +103,6 @@ export default class MainPageStore {
         let i = 0
 
         argMas.forEach((el, index)=>{
-            debugger
 
             if(i===0){
 
@@ -126,14 +144,13 @@ export default class MainPageStore {
 
         })
 
-        debugger
 
 
         return arr
 
     }
 
-    getQuery(){
+    getPage(){
         let str = '';
 
         str= '?page='+this._requestHistoreCount
@@ -142,10 +159,27 @@ export default class MainPageStore {
         return str
     }
 
+
+    historyInitialExpenses(query=''){
+        this._query = query
+        this._requestHistoreCount = 0
+        this._maxHistory = null
+        return getHistoryExpenses(this.getPage() + this._query).then((response) => {
+            this._requestHistoreCount++
+
+            this._historyData = [...this.doArray(response.data)]
+            return Promise.resolve()
+
+        }).catch(({response}) => {
+
+            console.log('ExpensesByMonthError', response)
+            return Promise.reject(response.data.status)
+        })
+    }
+
     historyExpenses(){
 
-
-        return getHistoryExpenses(this.getQuery()).then((response) => {
+        return getHistoryExpenses(this.getPage() + this._query ).then((response) => {
             this._requestHistoreCount++
             console.log('this._requestHistoreCount: ', this._requestHistoreCount)
 

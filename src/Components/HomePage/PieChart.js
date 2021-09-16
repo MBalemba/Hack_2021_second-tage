@@ -54,11 +54,8 @@ class ApexChart extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.data.length !== this.props.data.length) {
-            debugger
-
             const curMas = this.props.data.map(el => el.summary)
             const categoryMas = this.props.data.map(el => el.category)
-            debugger
             this.setState({
                 series: curMas,
                 options: {

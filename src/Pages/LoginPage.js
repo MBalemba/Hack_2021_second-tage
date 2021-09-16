@@ -7,8 +7,7 @@ import {observer} from "mobx-react-lite";
 import {useContext} from "react";
 import {Context} from "../index";
 import {Redirect} from "react-router-dom";
-
-// import './../Styles.scss'
+import './../Styles.scss'
 
 
 function Input({type, ...props}) {
@@ -24,10 +23,10 @@ function Input({type, ...props}) {
 
 
     return (
-        <div className={'input-auth'}>
-            <div className={'input-auth__wrapper'}>
-                <input onChange={(e)=>props.handleOnchange(e.target.value)} name={type} {...props} className={'input-auth__input'} type={isPasswordHidden ? 'text' : type}/>
-                <div className={'input-auth__icon'} onClick={()=>toggleHiddenPassword()}>
+        <div className={'input'}>
+            <div className={'input__wrapper'}>
+                <input onChange={(e)=>props.handleOnchange(e.target.value)} name={type} {...props} className={'input__input'} type={isPasswordHidden ? 'text' : type}/>
+                <div className={'input__icon'} onClick={()=>toggleHiddenPassword()}>
                     {type === 'password'
                         ? <LockIconInput/>
                         : <UserIconInput/>}

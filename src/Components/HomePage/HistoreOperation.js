@@ -1,15 +1,226 @@
-import React, {useEffect, useState,createRef, useContext} from 'react';
+import React, {useEffect, useState, createRef, useContext} from 'react';
 import './HistoreOperation.scss'
 import {Context} from "../../index";
 import TransactionOut from "../common/HomePage/svg/TransactionOut";
 import TransactionMe from "../common/HomePage/svg/TransactionMe";
 import {observer} from "mobx-react-lite";
 import {BarLoader, BounceLoader, PuffLoader, SkewLoader} from "react-spinners";
+import Toolbar from "../common/HomePage/svg/Toolbar";
+import {Input} from "../../Pages/LoginPage";
+import LockIconInput from "../common/LoginPage/svg/LockIconInput";
+import UserIconInput from "../common/LoginPage/svg/UserIconInput";
+
+const SettingBar = observer(({homePage, login}) => {
+    const [sum_left, setSum_left] = useState('')
+    const [sum_right, setSum_right] = useState('')
+    const [date_1, setDate_1] = useState('')
+    const [date_2, setDate_2] = useState('')
+    const [error, setError] = useState({status: false, message: 'error'})
+
+    const handleClickSum = (e)=>{
+        const element = e.target;
+        element.selectionStart = element.value.length - 2;
+        element.selectionEnd = element.value.length - 2;
+    }
+
+    function doRequest() {
+
+        let returnQuery = ()=>{
+            let str = '';
+            const s_1= sum_left===''? '' : `&minSum=`+Number(sum_left.match(/\d*/gi).join(''))
+            const s_2= sum_right===''? '': '&maxSum='+Number(sum_right.match(/\d*/gi).join(''))
+            const d_1=  date_1===''?'':'&from='+date_1.replace(/-/gi, '.')
+            const d_2=  date_2===''?'':'&to='+date_2.replace(/-/gi, '.')
+            const operation= homePage.Input && homePage.Output ? '&operationType=all': (homePage.Input?'&operationType=input ':'&operationType=output ')
+            str= s_1 + s_2 +d_1 + d_2 + operation
+            debugger
+
+            return str
+        }
+
+
+        homePage.setFetchingHistory(true)
+        const getData = () => homePage.historyInitialExpenses(returnQuery())
+        getData()
+            .then(() => {
+                homePage.setFetchingHistory(false)
+            })
+            .catch((status) => {
+                login.checkStatus(status).then(() => {
+                    // debugger
+                    getData().then(() => {
+                        homePage.setFetchingHistory(false)
+                    })
+                }).catch(() => {
+                    homePage.setFetchingHistory(false)
+                })
+            })
+    }
+
+    function giveValidateValue(elem){
+
+        const regExpFunc = (value) => {
+            return value.match(/\d*/gi).join('')
+        }
+
+        const target = elem
+        let value = Number(regExpFunc(target.value))
+        console.log(target.name)
+
+        if((''+value).length>7){
+            value = Number((''+value).slice(0, 7))
+
+        }
+        if (value !== 0) {
+            value = value.toLocaleString() + ' ₽'
+        } else {
+            value=''
+        }
+
+
+        const pointer = target.selectionStart;
+        const element = target;
+        window.requestAnimationFrame(() => {
+            element.selectionStart = value.length - 2;
+            element.selectionEnd = value.length - 2;
+        });
+
+        return value
+    }
+
+    const handleChange_1 = (e) => {
+        if(giveValidateValue(e.target) === ''){
+            setSum_right('')
+        }
+        setSum_left(giveValidateValue(e.target))
+    }
+
+
+    const handleChange_2 = (e) => {
+        setSum_right(giveValidateValue(e.target))
+    }
+    const handleChange_3 = (e) => {
+        console.log(e.target.value)
+        setDate_1(e.target.value)
+    }
+    const handleChange_4 = (e) => {
+        setDate_2(e.target.value)
+    }
+    const handleChange_5 = (e) => {
+
+    }
+    const handleChange_6 = (e) => {
+
+    }
+
+    return (
+        <div className={'history__toolbar'}>
+            <div className={'history__dataBlock'}>
+                <div className={'history__toolbar_element'}>
+                    <label className={'history__label'} htmlFor="price-start">Сумма</label>
+                    <div className={'history__inputBlock'}>
+                        <div className={'input history__input'}>
+                            <div className={'input__wrapper'}>
+                                <input onBlur={()=>doRequest()}  placeholder={'От'} name={'sum_left'} onClick={handleClickSum} onChange={handleChange_1} value={sum_left} id={'price-start'}
+                                       className={'input__input'}/>
+                            </div>
+                        </div>
+                        <div className={'input history__input'}>
+                            <div className={'input__wrapper'}>
+                                <input onBlur={(e)=>{
+                                    const value_left = Number( sum_left.match(/\d*/gi).join(''))
+                                    const value_right = Number(e.target.value.match(/\d*/gi).join(''))
+                                    debugger
+                                    if(value_left>value_right && value_right!=''){
+                                        setSum_right('')
+                                        setError({status: true, message: 'Сумма от должна быть меньше, чем сумма до'})
+
+                                        setTimeout(()=>{setError({status: false, message: 'Сумма от должна быть меньше, чем сумма после'})}, 3000)
+                                    } else{
+                                        doRequest()
+                                    }
+                                }} placeholder={'До'} name={'sum_right'} onClick={handleClickSum}  onChange={handleChange_2} value={sum_right}
+                                       className={'input__input'}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={'history__toolbar_element'}>
+                    <label className={'history__label'} htmlFor="date-start">Дата</label>
+                    <div className={'history__inputBlock'}>
+                        <div className={'input history__input'}>
+                            {date_1==='' && <label className={'labelDate'} htmlFor="date-start">Начало</label>}
+                            <div className={'history__input_wrapper'}>
+                                <input onBlur={()=>doRequest()} onChange={handleChange_3} value={date_1} type="date" name={'date-start'} id={'date-start'} className={'inputDate'}/>
+                            </div>
+                        </div>
+                        <div className={'input history__input'}>
+                            {date_2==='' && <label className={'labelDate'} htmlFor="date-end">Конец</label>}
+
+                            <div className={'history__input_wrapper'}>
+                                <input onBlur={()=>doRequest()} disabled={date_1===''} min={date_1} onChange={handleChange_4} value={date_2}  type="date" name={'date-end'} id={'date-end'} className={'inputDate'}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {error.status &&
+                <div className={'error'}>
+                    <p className={'error__p'}>
+                        <span className={'error__span'}></span>
+                        {error.message}
+                    </p>
+                </div>
+
+                }
+
+                <div className={'history__toolbar_element'}>
+                    <div className={'history__label'}>Тип операции</div>
+                    <div className={'input__wrapper'}>
+                        <button onClick={()=>{
+                            if(homePage.Input && homePage.Output){
+                               homePage.setInput(false)
+                                doRequest()
+
+                            } else if(homePage.Output && !homePage.Input ){
+                                homePage.setInput(true)
+                                doRequest()
+                            }
+                        }} className={`history__operationButton button button_bigR ${homePage.Input? 'button_blue': 'button_white'}` }>
+                            Входящие
+                        </button>
+                        <button onClick={()=>{
+                            if(homePage.Input && homePage.Output){
+                                homePage.setOutput(false)
+                                doRequest()
+                            } else if(!homePage.Output && homePage.Input){
+                                homePage.setOutput(true)
+                                doRequest()
+                            }
+
+                            doRequest()
+                        }}
+                                className={`history__operationButton  button_bigR ${homePage.Output ? 'button_blue': 'button_white'}`}>
+                            Исходящие
+                        </button>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    )
+})
 
 const HistoreOperation = observer(() => {
 
     const {homePage, login} = useContext(Context)
     const ref = createRef()
+    const [isSetting, setIsSetting] = useState('false')
+
     function doRequest() {
         homePage.setFetchingHistory(true)
         const getData = () => homePage.historyExpenses()
@@ -30,41 +241,44 @@ const HistoreOperation = observer(() => {
     }
 
     useEffect(() => {
-        debugger
         doRequest()
-
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
 
         console.log(homePage.HistoryData.length)
-        debugger
 
     }, [homePage.HistoryData.length])
 
 
-
-
-    const scrollFunc = (e)=>{
-        if(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 750 && !homePage.FetchingHistory){
+    const scrollFunc = (e) => {
+        if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 750 && !homePage.FetchingHistory) {
             debugger
-            if(homePage.HistoryCount>1 && homePage.HistoryCount!== homePage.HistoryMax){
+            if (homePage.HistoryCount > 1 && homePage.HistoryCount !== homePage.HistoryMax) {
                 doRequest()
             }
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const element = ref.current
         console.log(element)
         element.addEventListener('scroll', scrollFunc)
     }, [])
 
 
-
     return (
         <div className={'history'}>
-            <div className={'history__toggle '}></div>
+            <div onClick={() => {
+                setIsSetting(!isSetting)
+            }} className={'history__toggle'}>
+                <Toolbar/>
+            </div>
+
+        <div style={{display: isSetting? 'none' : 'block' }}>
+            <SettingBar  homePage={homePage} login={login} />
+        </div>
+
 
 
             <div className="history__content">
@@ -85,7 +299,7 @@ const HistoreOperation = observer(() => {
                                                 <div className={'history__transItem'}>
                                                     <div className={'history__transItem_left'}>
                                                         {
-                                                            sum<0 ? <TransactionOut/>
+                                                            sum < 0 ? <TransactionOut/>
                                                                 : <TransactionMe/>
                                                         }
 
@@ -123,9 +337,8 @@ const HistoreOperation = observer(() => {
                 </div>
                 {homePage.FetchingHistory &&
                 <div className={'history__spinner'}>
-                    <PuffLoader size={50} />
+                    <PuffLoader size={50}/>
                 </div>}
-
 
 
             </div>

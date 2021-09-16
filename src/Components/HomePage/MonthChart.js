@@ -15,7 +15,7 @@ class ApexChat extends React.Component {
             console.log('seriesIndex: ', seriesIndex)
             console.log('w', w)
 
-            let data = this.props.dateData[dataPointIndex].data
+            let data = this.props?.dateData[dataPointIndex]?.data
 
             return `<div class='tooltip monthChart__tooltip'>
                             <div class='tooltip__tooltipContent'>
@@ -155,7 +155,7 @@ class ApexChat extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        debugger
+
         console.log(this.state)
         if(prevProps.dateData.length !== this.props.dateData.length){
             const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])

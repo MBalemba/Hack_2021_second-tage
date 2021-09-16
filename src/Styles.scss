@@ -3,14 +3,14 @@
   min-width: 100vw;
   min-height: 100vh;
 
-  &-authorisation{
+  &-authorisation {
     background-color: #141834;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &-home{
+  &-home {
     background-color: #E5E5E5;
     display: flex;
     justify-content: center;
@@ -58,6 +58,12 @@
 
   &__input {
     margin-bottom: 10px;
+    position: relative;
+
+    &_wrapper{
+      display: flex;
+      justify-content: center;
+    }
   }
 
   &__button {
@@ -68,7 +74,7 @@
 }
 
 
-.input-auth {
+.input {
   padding: 18px 22px 18px 25px;
   width: 280px;
   height: 56px;
@@ -103,12 +109,24 @@
   border-radius: 7px;
   padding: 14px;
 
-  &_orn{
+  &_orn {
     background-color: #EA5616;
   }
 
-  &_blue{
+  &_blue {
     background-color: #2C2D84;
+    color: white;
+  }
+
+  &_white {
+    color: #141834;
+    background-color: white;
+    border: 1px solid rgba(20, 24, 52, 0.1);
+  }
+
+  &_bigR{
+    border-radius: 35px;
+    padding: 10px 20px 8px;
   }
 }
 
