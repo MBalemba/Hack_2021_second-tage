@@ -15,6 +15,8 @@ const App = observer(() =>{
 
     console.log(process.env.REACT_APP_API_URL)
 
+
+
   return (
       <BrowserRouter className="App">
         <Switch>

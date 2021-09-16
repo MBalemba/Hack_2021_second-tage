@@ -213,6 +213,26 @@ export default class MainPageStore {
         })
     }
 
+    returnToInitial(){
+        this._isAuthUser = false
+        this._monthExpenses = []
+        this._weekExpenses = {averageAmount:[], currentAmount: [], maxAmount: 0}
+        this._topThree = {list: [], wholeSum: 0}
+        this._radarData = {currentIndicators: [], monthlyAverages: []}
+
+
+        this._historyData = []
+        this._requestHistoreCount = 0
+        this._maxHistory = null
+        this._isFetchingHistory = false
+        this._query = ''
+        this._input = true
+        this._output = true
+        this._pieData = []
+
+    }
+
+
 
 
 

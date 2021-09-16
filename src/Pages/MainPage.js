@@ -5,7 +5,7 @@ import Logo from "../Components/common/HomePage/svg/Logo";
 import MonthExpenses from "../Components/HomePage/MonthExpenses";
 import Offer from "../Components/HomePage/Offer";
 import WeekExpenses from "../Components/HomePage/WeekExpenses";
-import {Context} from "../index";
+import {Context, homePage} from "../index";
 import ReactApexChart from "react-apexcharts";
 import MonthChart from "../Components/HomePage/MonthChart";
 import Radar from "../Components/HomePage/Radar";
@@ -35,6 +35,7 @@ function Paper(props) {
         const {login} = useContext(Context)
 
         if(!login.IsAuth){
+            debugger
             return <Redirect to={'login'}/>
         }
 
@@ -47,7 +48,8 @@ function Paper(props) {
                             <p className={'topLogo__text'}>Анализ финансов</p>
                         </div>
 
-                        <Link onClick={()=>{
+                        <Link to={'/login'} onClick={()=>{
+                            homePage.returnToInitial()
                             login.out()
                         }} className={'home-content__outLink'}>
                             Выход

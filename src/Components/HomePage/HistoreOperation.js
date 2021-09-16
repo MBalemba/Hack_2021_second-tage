@@ -28,14 +28,15 @@ const SettingBar = observer(({homePage, login}) => {
     function doRequest() {
 
         let returnQuery = ()=>{
+            debugger
             let str = '';
             const s_1= sum_left===''? '' : `&minSum=`+Number(sum_left.match(/\d*/gi).join(''))
             const s_2= sum_right===''? '': '&maxSum='+Number(sum_right.match(/\d*/gi).join(''))
-            const d_1=  date_1===''?'':'&from='+date_1.replace(/-/gi, '.')
-            const d_2=  date_2===''?'':'&to='+date_2.replace(/-/gi, '.')
+            const d_1=  date_1===''?'':'&from='+date_1.split('-').reverse().join('.')
+            const d_2=  date_2===''?'':'&to='+date_2.split('-').reverse().join('.')
             const operation= homePage.Input && homePage.Output ? '&operationType=all': (homePage.Input?'&operationType=input ':'&operationType=output ')
             str= s_1 + s_2 +d_1 + d_2 + operation
-            debugger
+
 
             return str
         }
@@ -91,13 +92,15 @@ const SettingBar = observer(({homePage, login}) => {
     }
 
     const handleChange_1 = (e) => {
-        setSum_left(giveValidateValue(e.target))
+        debugger
+        setSum_left(giveValidateValue(e.target.value))
+
         setIsChanging(true)
     }
 
 
     const handleChange_2 = (e) => {
-        setSum_right(giveValidateValue(e.target))
+        setSum_right(giveValidateValue(e.target.value))
         setIsChanging(true)
     }
     const handleChange_3 = (e) => {

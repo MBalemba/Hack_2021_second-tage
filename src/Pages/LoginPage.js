@@ -66,7 +66,7 @@ const LoginPage = observer( function() {
 
 
     if(login.IsAuth){
-        return <Redirect to={'home'}/>
+        return <Redirect to={'/home'}/>
     }
 
     return (

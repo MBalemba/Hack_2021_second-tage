@@ -23,7 +23,7 @@ class ApexChart extends React.Component {
             height: 50,
             options: {
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                 },
                 height: 50,
                 chart: {
@@ -34,6 +34,9 @@ class ApexChart extends React.Component {
                 labels: ['Супермаркеты', 'Переводы', 'Рестораны', 'Развлечения', 'Одежда', 'Транспорт', 'Развлечения'],
                 legend: {
                     show: false,
+                },
+                stroke:{
+                    width: 0,
                 },
                 responsive: [{
                     breakpoint: 200,
