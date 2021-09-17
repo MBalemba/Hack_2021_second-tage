@@ -313,7 +313,6 @@
 
     &_middle {
       width: 509px;
-      height: 750px;
       @media (max-width: 1280px) {
         margin-top: 15px;
         width: 100%;
@@ -332,21 +331,23 @@
     }
 
     &_right {
+      height: fit-content;
       width: 346px;
-      height: 400px;
       @media (max-width: 1280px) {
         width: 470px;
         order: 2;
+        height: fit-content;
       }
 
       @media (max-width: 1080px) {
-
+        height: fit-content;
         width: 100%;
         order: 3;
         margin-top: 10px;
         margin-bottom: 0px;
       }
       @media (max-width: 768px) {
+        height: fit-content;
         display: block;
         flex-wrap: wrap;
         margin-top: 10px;
