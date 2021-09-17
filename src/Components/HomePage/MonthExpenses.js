@@ -41,7 +41,7 @@ const MonthExpenses = observer(() => {
 
             {homePage.TopThreeMonth.map((el, index) =>
                 <div key={el.category} className={'monthExpenses__card'}>
-                    <p className={'monthExpenses__title'}>
+                    <p title={el.category} className={'monthExpenses__title'}>
                         {el.category}
                     </p>
                     <div className={'monthExpenses__numbers'}>
