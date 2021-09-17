@@ -8,6 +8,7 @@ import {useContext} from "react";
 import {Context} from "../index";
 import {Redirect} from "react-router-dom";
 import './../Styles.scss'
+import {motion} from "framer-motion";
 
 
 function Input({type, ...props}) {
@@ -68,8 +69,25 @@ const LoginPage = observer( function() {
     return (
         <div className={'background background-authorisation'}>
 
+            <motion.div  className={'box form-wrapper'}
+                        onClick={() => {
 
-            <div className="form-wrapper">
+                        }}
+
+                        animate={{
+                            opacity: 1,
+                        }}
+
+                        initial={{
+                            opacity: 0.1,
+                        }}
+
+                        transition={{
+                            type: 'spring',
+                            stiffness: 60,
+                        }
+                        }
+            >
 
                 <div className="form-wrapper__leftside">
                     <div className={'form-wrapper__logo'}>
@@ -98,7 +116,7 @@ const LoginPage = observer( function() {
                     <img className={'form-wrapper__img'} src={img} alt="Картинка"/>
                 </div>
 
-            </div>
+            </motion.div>
 
 
         </div>

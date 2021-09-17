@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import './MainPage.scss'
-import {Link, Redirect, useHistory} from "react-router-dom";
+import {Link, Redirect, Switch, useHistory} from "react-router-dom";
 import Logo from "../Components/common/HomePage/svg/Logo";
 import MonthExpenses from "../Components/HomePage/MonthExpenses";
 import Offer from "../Components/HomePage/Offer";
@@ -13,6 +13,7 @@ import PieChart from "../Components/HomePage/PieChart";
 import HistoreOperation from "../Components/HomePage/HistoreOperation";
 import {LOGIN_ROUTE} from "../pagePath";
 import {observer} from "mobx-react-lite";
+import {motion} from "framer-motion";
 
 
 function Paper(props) {
@@ -35,12 +36,30 @@ function Paper(props) {
         const {login} = useContext(Context)
 
         if(!login.IsAuth){
-
             return <Redirect to={'login'}/>
         }
 
         return (
             <div className={'background background-home'}>
+                <motion.div className={'box'}
+                            onClick={() => {
+
+                            }}
+
+                            animate={{
+                                opacity: 1,
+                            }}
+
+                            initial={{
+                                opacity: 0.1,
+                            }}
+
+                            transition={{
+                                type: 'spring',
+                                stiffness: 60,
+                            }
+                            }
+                >
                 <div className="home-content">
                     <div className="home-content__header">
                         <div className={'home-content__topLogo topLogo'}>
@@ -137,6 +156,8 @@ function Paper(props) {
                         </div>
                     </div>
                 </div>
+
+                </motion.div>
             </div>
         );
     });
