@@ -13,11 +13,13 @@ class ApexChat extends React.Component {
 
             series: [{
                 name: 'Средние показатели за месяц',
-                data: [80, 50, 30],
-            }, {
-                name: 'Текущие показатели',
-                data: [20, 30, 40],
-            }],
+                data: [80, 50, 30, 22, 22],
+            },
+                {
+                    name: 'Средние показатели за месяц',
+                    data: [80, 50, 30, 22, 22],
+                },
+            ],
 
 
             options: {
@@ -59,7 +61,7 @@ class ApexChat extends React.Component {
                     tooltipHoverFormatter: undefined,
                     customLegendItems: [],
                     offsetX: 0,
-                    offsetY: -20,
+                    offsetY: 5,
                     labels: {
                         useSeriesColors: false
                     },
@@ -111,10 +113,10 @@ class ApexChat extends React.Component {
                 },
                 xaxis: {
 
-                    categories: ['Развлечения', 'Комунальные услуги ', 'Супермаркеты']
+                    categories: ['', '', '', '']
                 },
 
-                yaxis:{
+                yaxis: {
                     show: false,
                     tickAmount: 6,
                 },
@@ -133,8 +135,8 @@ class ApexChat extends React.Component {
 
             const avrMas = this.props.data.monthlyAverages.map(el => el.summary)
             const curMas = this.props.data.currentIndicators.map(el => el.summary)
-            const categoryMas = this.props.data.monthlyAverages.map(el => el.category)
-
+            const categoryMas = this.props.data.monthlyAverages.map(el => '')
+            debugger
             this.setState({
                 series: [{
                     name: 'Средние показатели за месяц',
@@ -153,11 +155,127 @@ class ApexChat extends React.Component {
     }
 
     render() {
+
+        debugger
+        const categoryMas = this.props.data.monthlyAverages.map(el => el.category)
+        const length = categoryMas.length
+        let arrayStyled = []
+
+        if(length===7){
+            arrayStyled = [
+                {
+                    position: 'absolute',
+                    top: '-22px',
+                    left: '200px',
+                },
+                {
+                    position: 'absolute',
+                    top: '50px',
+                    left: '300px',
+                },
+                {
+                    position: 'absolute',
+                    top: '130px',
+                    left: '300px',
+                },
+                {
+                    position: 'absolute',
+                    top: '190px',
+                    left: '255px',
+                },
+                {
+                    position: 'absolute',
+                    top: '200px',
+                    left: '140px',
+                },
+                {
+                    position: 'absolute',
+                    top: '150px',
+                    left: '10px',
+                },
+                {
+                    position: 'absolute',
+                    top: '40px',
+                    left: '35px',
+                },
+            ]
+        } else if(length===6){
+            arrayStyled = [
+                {
+                    position: 'absolute',
+                    top: '-22px',
+                    left: '200px',
+                },
+                {
+                    position: 'absolute',
+                    top: '50px',
+                    left: '300px',
+                },
+                {
+                    position: 'absolute',
+                    top: '150px',
+                    left: '300px',
+                },
+                {
+                    position: 'absolute',
+                    top: '215px',
+                    left: '200px',
+                },
+                {
+                    position: 'absolute',
+                    top: '180px',
+                    left: '40px',
+                },
+                {
+                    position: 'absolute',
+                    top: '30px',
+                    left: '40px',
+                },
+            ]
+        }  if(length===5){
+            arrayStyled = [
+                {
+                    position: 'absolute',
+                    top: '-22px',
+                    left: '200px',
+                },
+                {
+                    position: 'absolute',
+                    top: '50px',
+                    left: '300px',
+                },
+                {
+                    position: 'absolute',
+                    top: '200px',
+                    left: '270px',
+                },
+                {
+                    position: 'absolute',
+                    top: '200px',
+                    left: '130px',
+                },
+                {
+                    position: 'absolute',
+                    top: '50px',
+                    left: '40px',
+                },
+            ]
+        }
+
         return (
 
 
             <div className="radar">
-                <ReactApexChart options={this.state.options} series={this.state.series} width={550} type="radar"/>
+                <ReactApexChart options={this.state.options} series={this.state.series} height={250} width={450}
+                                type="radar"/>
+
+
+                {categoryMas.map((el, index)=>
+                    <div title={el} style={arrayStyled[index]} className={'radar__item'}>
+                        {el}
+                    </div>
+                )}
+
             </div>
 
 
@@ -168,21 +286,21 @@ class ApexChat extends React.Component {
 
 const Radar = observer(() => {
     const {homePage, login} = useContext(Context)
-    useEffect(() => {
-        const getData = () => homePage.weekGroupExpenses()
+     useEffect(() => {
+         const getData = () => homePage.weekGroupExpenses()
 
-        getData()
-            .then(() => {
+         getData()
+             .then(() => {
 
-            })
-            .catch((status) => {
-                login.checkStatus(status).then(() => {
-                    getData()
-                }).catch(() => {
+             })
+             .catch((status) => {
+                 login.checkStatus(status).then(() => {
+                     getData()
+                 }).catch(() => {
 
-                })
-            })
-    }, [])
+                 })
+             })
+     }, [])
 
     return (
         <ApexChat data={homePage.RadarData}/>

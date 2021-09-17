@@ -226,7 +226,7 @@ const SettingBar = observer(({homePage, login}) => {
 
                             doRequest()
                         }}
-                                className={`history__operationButton  button_bigR ${homePage.Output ? 'button_blue': 'button_white'}`}>
+                                className={`history__operationButton button button_bigR ${homePage.Output ? 'button_blue': 'button_white'}`}>
                             Исходящие
                         </button>
                     </div>
