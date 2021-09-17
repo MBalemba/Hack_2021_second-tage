@@ -61,7 +61,7 @@ const SettingBar = observer(({homePage, login}) => {
     }
 
     function giveValidateValue(elem){
-
+        debugger
         const regExpFunc = (value) => {
             return value.match(/\d*/gi).join('')
         }
@@ -93,14 +93,14 @@ const SettingBar = observer(({homePage, login}) => {
 
     const handleChange_1 = (e) => {
         debugger
-        setSum_left(giveValidateValue(e.target.value))
+        setSum_left(giveValidateValue(e.target))
 
         setIsChanging(true)
     }
 
 
     const handleChange_2 = (e) => {
-        setSum_right(giveValidateValue(e.target.value))
+        setSum_right(giveValidateValue(e.target))
         setIsChanging(true)
     }
     const handleChange_3 = (e) => {
@@ -304,13 +304,16 @@ const HistoreOperation = observer(() => {
                 <Toolbar/>
             </div>
 
-        <div style={{display: isSetting? 'none' : 'block' }}>
-            <SettingBar  homePage={homePage} login={login} />
-        </div>
+
 
 
 
             <div className="history__content">
+
+
+                <div style={{display: isSetting? 'none' : 'block' }}>
+                    <SettingBar  homePage={homePage} login={login} />
+                </div>
 
                 <div ref={ref} className={'history__menu'}>
 

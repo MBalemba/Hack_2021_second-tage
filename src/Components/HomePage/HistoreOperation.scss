@@ -19,7 +19,6 @@
 
   &__toolbar {
     padding-bottom: 20px;
-    position: absolute;
     top: 0;
     z-index: 99;
     background-color: white;
@@ -74,12 +73,15 @@
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    max-height: 559px;
   }
 
   &__menu {
     position: relative;
     height: 600px;
-    max-height: 662px;
+
 
     overflow: scroll;
     overflow-x: hidden;

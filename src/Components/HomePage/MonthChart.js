@@ -209,7 +209,7 @@ const MonthChart = observer(() => {
     }, [homePage.ExpensesByMonth])
 
     return (
-        <div>
+        <div className={'monthChart'}>
             <ApexChat dateData={homePage?.ExpensesByMonth} />
 
         </div>

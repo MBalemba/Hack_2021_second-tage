@@ -49,6 +49,9 @@ const MonthExpenses = observer(() => {
                             {(Number(el.price)).toLocaleString()}
                             <span className={'monthExpenses__price_currency'}>&nbsp;₽</span>
                         </p>
+                        <p className={'monthExpenses__before'}>
+
+                        </p>
                         <p className={'monthExpenses__percent'}>
                             {el.percent} %
                         </p>

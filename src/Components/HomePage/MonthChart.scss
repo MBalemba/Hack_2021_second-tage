@@ -1,5 +1,9 @@
 .monthChart{
   margin-top: 30px;
+  @media (max-width: 768px) {
+    position: relative;
+    left: -20px;
+  }
 
   &__tooltip{
     width: 123px;
