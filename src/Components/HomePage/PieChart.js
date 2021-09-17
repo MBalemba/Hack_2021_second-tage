@@ -72,7 +72,7 @@ class ApexChart extends React.Component {
     render() {
         return (
 
-            <div className={"chart"}>
+            <div className={"chartPie"}>
                 <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={270}
                                 height={240}
                 />

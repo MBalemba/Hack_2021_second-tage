@@ -7,8 +7,7 @@ import {observer} from "mobx-react-lite";
 import {BarLoader, BounceLoader, PuffLoader, SkewLoader} from "react-spinners";
 import Toolbar from "../common/HomePage/svg/Toolbar";
 import {Input} from "../../Pages/LoginPage";
-import LockIconInput from "../common/LoginPage/svg/LockIconInput";
-import UserIconInput from "../common/LoginPage/svg/UserIconInput";
+import {motion} from 'framer-motion'
 
 const SettingBar = observer(({homePage, login}) => {
     const [sum_left, setSum_left] = useState('')
@@ -266,6 +265,7 @@ const HistoreOperation = observer(() => {
     }
 
     useEffect(() => {
+
         doRequest()
     }, [])
 
@@ -305,9 +305,33 @@ const HistoreOperation = observer(() => {
             <div className="history__content">
 
 
-                <div style={{display: isSetting? 'none' : 'block' }}>
-                    <SettingBar  homePage={homePage} login={login} />
-                </div>
+                <motion.div className={'box'}
+
+                            animate={{
+                                opacity: isSetting? 0 : 1,
+                                height: isSetting? '0' : 'auto',
+                            }}
+
+                            initial={{
+                                opacity: 0,
+                                display: 'none',
+                                height: '0',
+                            }}
+
+                            transition={{
+                                type: 'spring',
+                                stiffness: 60,
+                            }
+                            }
+                >
+                    <div >
+                        <SettingBar  homePage={homePage} login={login} />
+                    </div>
+                </motion.div>
+
+
+
+
 
                 <div ref={ref} className={'history__menu'}>
 

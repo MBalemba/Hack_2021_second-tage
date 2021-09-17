@@ -1,5 +1,5 @@
 
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,11 +50,10 @@
     width: 80vw;
     height: 350px;
   }
-  @media (max-width:480px) {
+  @media (max-width: 480px) {
     width: 350px;
     height: 350px;
   }
-
 
 
   &__img {
@@ -178,6 +177,7 @@
 
   &_orn {
     background-color: #EA5616;
+
     &:hover {
       background: #C6420C;
     }
@@ -186,6 +186,7 @@
   &_blue {
     background-color: #2C2D84;
     color: white;
+
     &:hover {
       background: #141834;
     }
@@ -195,6 +196,10 @@
     color: #141834;
     background-color: white;
     border: 1px solid rgba(20, 24, 52, 0.1);
+
+    &:hover {
+      background: #e5e5e5;
+    }
   }
 
   &_bigR {
@@ -210,8 +215,10 @@
   padding: 14px;
   width: 280px;
   transition: 0.2s ease-in;
+
   &_orn {
     background-color: #EA5616;
+
     &:hover {
       background: #C6420C;
     }
@@ -220,6 +227,10 @@
   &_blue {
     background-color: #2C2D84;
     color: white;
+
+    &:hover {
+      background: #141834;
+    }
   }
 
   &_white {
