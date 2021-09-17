@@ -43,6 +43,11 @@ export const getTopExpensesForTheMonth = async () => {
     return response
 }
 
+export const getOffer = async () => {
+    const response = await $authHost.get('/transactions/advertisingProducts')
+    return response
+}
+
 
 export const refresh = async () => {
     const response = await $authHostRefresh.post('refreshToken')

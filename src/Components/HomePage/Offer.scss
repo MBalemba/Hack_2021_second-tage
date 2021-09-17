@@ -3,11 +3,16 @@
   justify-content: space-between;
   align-items: center;
 
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
 
   &__blockText {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
   }
 
   &__title {
@@ -28,6 +33,13 @@
     line-height: 17px;
     color: rgba(255, 255, 255, 0.5);
 
+  }
+
+  &__button{
+    @media (max-width: 480px) {
+      width: 300px;
+      margin-top: 10px;
+    }
   }
 
 

@@ -6,6 +6,8 @@ export default class LoginStore {
 
     constructor() {
         this._isAuthUser = false
+
+        this._firstLoad = true
         makeAutoObservable(this)
     }
 
@@ -52,6 +54,14 @@ export default class LoginStore {
         localStorage.removeItem('token')
         localStorage.removeItem('RefreshToken')
         this._isAuthUser = false
+    }
+
+    setFirstLoad(bool){
+        this._firstLoad = bool
+    }
+
+    get FirstLoad(){
+        return this._firstLoad
     }
 
 

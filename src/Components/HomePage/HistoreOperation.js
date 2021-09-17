@@ -13,7 +13,7 @@ import UserIconInput from "../common/LoginPage/svg/UserIconInput";
 const SettingBar = observer(({homePage, login}) => {
     const [sum_left, setSum_left] = useState('')
     const [sum_right, setSum_right] = useState('')
-    const [date_1, setDate_1] = useState('')
+    const [date_1, setDate_1] = useState('2021-08-01')
     const [date_2, setDate_2] = useState('')
     const [error, setError] = useState({status: false, message: 'error'})
 
@@ -188,7 +188,7 @@ const SettingBar = observer(({homePage, login}) => {
                                         doRequest()
                                         setIsChanging(false)
                                     }
-                                }} disabled={date_1===''} min={date_1} onChange={handleChange_4} value={date_2}  type="date" name={'date-end'} id={'date-end'} className={'inputDate'}/>
+                                }}  min={date_1} onChange={handleChange_4} value={date_2}  type="date" name={'date-end'} id={'date-end'} className={'inputDate'}/>
                             </div>
                         </div>
                     </div>
@@ -337,12 +337,12 @@ const HistoreOperation = observer(() => {
 
                                                         <div className={'history__textBlock_left'}>
                                                             <p className={'history__text'}>{description}</p>
-                                                            <p className={'history__text_grey'}>{sum} ₽</p>
+                                                            <p className={'history__text_grey'}>{sum.toLocaleString()} ₽</p>
                                                         </div>
                                                     </div>
                                                     <div className={'history__transItem_right'}>
                                                         <div className={'history__textBlock_right'}>
-                                                            <p className={'history__text'}>Исходящая</p>
+                                                            <p className={'history__text'}>{sum>0?'Входящая':'Исходящая'}</p>
                                                             <p className={'history__text_grey history__text_uppercase'}>{currency}</p>
                                                         </div>
                                                     </div>

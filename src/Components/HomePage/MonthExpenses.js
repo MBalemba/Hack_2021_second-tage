@@ -6,6 +6,7 @@ import {Context} from "../../index";
 const MonthExpenses = observer(() => {
 
     const {homePage, login} = useContext(Context)
+    const colors = ['#EA5616', '#2C2D84', '#646872']
 
     useEffect(() => {
         debugger
@@ -59,7 +60,7 @@ const MonthExpenses = observer(() => {
                     </div>
 
                     <div className={'monthExpenses__line'}>
-                        <div className={'monthExpenses__line'} style={{position: 'absolute', left: '0', width: '49%', backgroundColor: '#EA5616'}} >
+                        <div className={'monthExpenses__line'} style={{position: 'absolute', left: '0', width: el.percent+'%', backgroundColor: colors[index]}} >
                         </div>
                     </div>
 

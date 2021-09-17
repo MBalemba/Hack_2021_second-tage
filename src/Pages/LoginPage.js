@@ -59,9 +59,7 @@ const LoginPage = observer( function() {
         login.doAutorizate(name,password )
     }
 
-    useEffect(()=>{
-        login.doRefresh().then(()=>{})
-    }, [])
+
 
 
 
@@ -90,7 +88,7 @@ const LoginPage = observer( function() {
                         </div>
 
 
-                        <button  className={'button button_orn form-wrapper__button '}>
+                        <button  className={'button_login button_login_orn'}>
                             Войти
                         </button>
 
@@ -99,7 +97,7 @@ const LoginPage = observer( function() {
                 </div>
 
                 <div className="form-wrapper__rightside">
-                    <img src={img} alt="Картинка"/>
+                    <img className={'form-wrapper__img'} src={img} alt="Картинка"/>
                 </div>
 
             </div>

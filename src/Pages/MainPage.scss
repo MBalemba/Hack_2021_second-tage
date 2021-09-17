@@ -135,7 +135,6 @@
     font-size: 20px;
     line-height: 22px;
     color: #141834;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
   }
@@ -228,6 +227,9 @@
         flex-wrap: wrap;
         margin-top: 10px;
         margin-bottom: 10px;
+      }
+      @media (max-width: 480px) {
+        height: 170px;
       }
     }
   }

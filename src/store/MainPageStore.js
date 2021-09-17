@@ -1,7 +1,7 @@
 import {makeAutoObservable, toJS} from "mobx";
 import {
     getExpectedDay,
-    getExpensesByMonth, getHistoryExpenses,
+    getExpensesByMonth, getHistoryExpenses, getOffer,
     getTopExpensesForTheMonth,
     getTopThreeMonthly,
     getWeekGroup,
@@ -34,6 +34,9 @@ export default class MainPageStore {
         this._output = true
 
 
+        this._offer = {"description": "string",
+            "link": "string",
+            "title": "string"}
 
         this._pieData = []
 
@@ -213,6 +216,18 @@ export default class MainPageStore {
         })
     }
 
+    offer(){
+        return getOffer().then((response) => {
+
+            console.log('pieData ', response)
+            this._offer = response.data
+            return Promise.resolve()
+        }).catch(({response}) => {
+            console.log('ExpensesByMonthError', response)
+            return Promise.reject(response.data.status)
+        })
+    }
+
     returnToInitial(){
         this._isAuthUser = false
         this._monthExpenses = []
@@ -229,13 +244,18 @@ export default class MainPageStore {
         this._input = true
         this._output = true
         this._pieData = []
+        this._offer = {"description": "string",
+            "link": "string",
+            "title": "string"}
 
     }
 
 
 
 
-
+    get Offer(){
+        return this._offer
+    }
 
 
     get WeekExpenses() {
