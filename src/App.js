@@ -1,4 +1,4 @@
-import './assets/font/Gilroy/stylesheet.css'
+import './assets/font/Gilroy/stylesheet.scss'
 import './App.css';
 import './Styles.scss'
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
@@ -10,6 +10,8 @@ import {Context} from "./index";
 import {MoonLoader} from "react-spinners";
 import {motion} from 'framer-motion'
 
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = observer(() => {
 
@@ -59,6 +61,13 @@ const App = observer(() => {
 
                             <Redirect to={LOGIN_ROUTE}/>
                         </Switch>
+
+
+                        <ToastContainer
+                            position="bottom-center"
+                            Type={'info'}
+                            Theme={'dark'}
+                        />
                     </BrowserRouter>
 
 

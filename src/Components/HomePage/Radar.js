@@ -136,7 +136,7 @@ class ApexChat extends React.Component {
             const avrMas = this.props.data.monthlyAverages.map(el => el.summary)
             const curMas = this.props.data.currentIndicators.map(el => el.summary)
             const categoryMas = this.props.data.monthlyAverages.map(el => '')
-            debugger
+
             this.setState({
                 series: [{
                     name: 'Средние показатели за месяц',
@@ -156,7 +156,7 @@ class ApexChat extends React.Component {
 
     render() {
 
-        debugger
+
         const categoryMas = this.props.data.monthlyAverages.map(el => el.category)
         const length = categoryMas.length
         let arrayStyled = []
@@ -252,12 +252,12 @@ class ApexChat extends React.Component {
                 {
                     position: 'absolute',
                     top: '200px',
-                    left: '130px',
+                    left: '100px',
                 },
                 {
                     position: 'absolute',
                     top: '50px',
-                    left: '40px',
+                    left: '21px',
                 },
             ]
         }

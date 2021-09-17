@@ -9,6 +9,8 @@ import {Context} from "../index";
 import {Redirect} from "react-router-dom";
 import './../Styles.scss'
 import {motion} from "framer-motion";
+import { toast } from 'react-toastify';
+
 
 
 function Input({type, ...props}) {
@@ -55,7 +57,11 @@ const LoginPage = observer( function() {
 
         e.preventDefault()
 
-        login.doAutorizate(name,password )
+        login.doAutorizate(name,password ).then(()=>{
+            toast('Успешно')
+        }).catch(()=>{
+            toast('Ошибка регистрации')
+        })
     }
 
 

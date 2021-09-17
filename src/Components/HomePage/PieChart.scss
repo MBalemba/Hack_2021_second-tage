@@ -10,6 +10,13 @@
   flex-direction: row;
   flex-wrap: wrap;
 
+  @media (max-width: 768px) {
+    display: block;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
   &__item {
     width: 48%;
     padding: 2px;
