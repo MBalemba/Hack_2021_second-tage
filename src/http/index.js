@@ -16,7 +16,7 @@ const $authHostRefresh = axios.create({
 
 
 const authInterceptor = config => {
-    console.log(localStorage.getItem('token'))
+
     config.headers.JWToken = `${localStorage.getItem('token')}`
     return config
 }

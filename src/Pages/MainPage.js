@@ -35,7 +35,7 @@ function Paper(props) {
         const {login} = useContext(Context)
 
         if(!login.IsAuth){
-            debugger
+
             return <Redirect to={'login'}/>
         }
 

@@ -14,7 +14,6 @@ const App = observer(() =>{
 
     const {login} = useContext(Context)
 
-    console.log(process.env.REACT_APP_API_URL)
 
     useEffect(()=>{
         login.doRefresh().then(()=>{

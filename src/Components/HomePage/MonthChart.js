@@ -10,10 +10,6 @@ class ApexChat extends React.Component {
     constructor(props) {
         super(props);
         let custom = function ({series, seriesIndex, dataPointIndex, w}) {
-            console.log('dataPointIndex: ', dataPointIndex)
-            console.log('series: ', series)
-            console.log('seriesIndex: ', seriesIndex)
-            console.log('w', w)
 
             let data = this.props?.dateData[dataPointIndex]?.data
 
@@ -156,7 +152,6 @@ class ApexChat extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot){
 
-        console.log(this.state)
         if(prevProps.dateData.length !== this.props.dateData.length){
             const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])
 
@@ -205,7 +200,6 @@ const MonthChart = observer(() => {
     }, [])
 
     useEffect(() => {
-        console.log(homePage?.ExpensesByMonth)
     }, [homePage.ExpensesByMonth])
 
     return (

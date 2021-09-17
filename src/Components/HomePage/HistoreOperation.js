@@ -28,7 +28,7 @@ const SettingBar = observer(({homePage, login}) => {
     function doRequest() {
 
         let returnQuery = ()=>{
-            debugger
+
             let str = '';
             const s_1= sum_left===''? '' : `&minSum=`+Number(sum_left.match(/\d*/gi).join(''))
             const s_2= sum_right===''? '': '&maxSum='+Number(sum_right.match(/\d*/gi).join(''))
@@ -50,7 +50,6 @@ const SettingBar = observer(({homePage, login}) => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    // debugger
                     getData().then(() => {
                         homePage.setFetchingHistory(false)
                     })
@@ -61,14 +60,13 @@ const SettingBar = observer(({homePage, login}) => {
     }
 
     function giveValidateValue(elem){
-        debugger
+
         const regExpFunc = (value) => {
             return value.match(/\d*/gi).join('')
         }
 
         const target = elem
         let value = Number(regExpFunc(target.value))
-        console.log(target.name)
 
         if((''+value).length>7){
             value = Number((''+value).slice(0, 7))
@@ -92,7 +90,7 @@ const SettingBar = observer(({homePage, login}) => {
     }
 
     const handleChange_1 = (e) => {
-        debugger
+
         setSum_left(giveValidateValue(e.target))
 
         setIsChanging(true)
@@ -104,7 +102,6 @@ const SettingBar = observer(({homePage, login}) => {
         setIsChanging(true)
     }
     const handleChange_3 = (e) => {
-        console.log(e.target.value)
         setDate_1(e.target.value)
         setIsChanging(true)
     }
@@ -124,14 +121,14 @@ const SettingBar = observer(({homePage, login}) => {
                                 <input onBlur={(e)=>{
                                     const value_left = Number(e.target.value.match(/\d*/gi).join(''))
                                     const value_right = Number(sum_right.match(/\d*/gi).join(''))
-                                    debugger
+
                                     if(value_left>value_right && value_right!=''){
                                         setSum_right('')
                                         setError({status: true, message: 'Сумма от должна быть меньше, чем сумма до'})
 
                                         setTimeout(()=>{setError({status: false, message: 'Сумма от должна быть меньше, чем сумма после'})}, 3000)
                                     } else{
-                                        debugger
+
                                         if(isChanging){
                                             doRequest()
                                             setIsChanging(false)
@@ -146,7 +143,7 @@ const SettingBar = observer(({homePage, login}) => {
                                 <input onBlur={(e)=>{
                                     const value_left = Number( sum_left.match(/\d*/gi).join(''))
                                     const value_right = Number(e.target.value.match(/\d*/gi).join(''))
-                                    debugger
+
                                     if(value_left>value_right && value_right!=''){
                                         setSum_right('')
                                         setError({status: true, message: 'Сумма от должна быть меньше, чем сумма до'})
@@ -259,7 +256,6 @@ const HistoreOperation = observer(() => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    // debugger
                     getData().then(() => {
                         homePage.setFetchingHistory(false)
                     })
@@ -275,14 +271,13 @@ const HistoreOperation = observer(() => {
 
     useEffect(() => {
 
-        console.log(homePage.HistoryData.length)
 
     }, [homePage.HistoryData.length])
 
 
     const scrollFunc = (e) => {
         if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 750 && !homePage.FetchingHistory) {
-            debugger
+
             if (homePage.HistoryCount > 1 && homePage.HistoryCount !== homePage.HistoryMax) {
                 doRequest()
             }
@@ -291,7 +286,6 @@ const HistoreOperation = observer(() => {
 
     useEffect(() => {
         const element = ref.current
-        console.log(element)
         element.addEventListener('scroll', scrollFunc)
     }, [])
 

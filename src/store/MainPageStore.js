@@ -84,19 +84,16 @@ export default class MainPageStore {
             return Promise.resolve()
         }).catch(({response}) => {
 
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
 
     weekGroupExpenses(){
         return getWeekGroup().then((response) => {
-            console.log('_radarData', response)
             this._radarData = {...response.data}
             return Promise.resolve()
         }).catch(({response}) => {
 
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
@@ -175,7 +172,6 @@ export default class MainPageStore {
 
         }).catch(({response}) => {
 
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
@@ -184,11 +180,9 @@ export default class MainPageStore {
 
         return getHistoryExpenses(this.getPage() + this._query ).then((response) => {
             this._requestHistoreCount++
-            console.log('this._requestHistoreCount: ', this._requestHistoreCount)
 
             if(response.data.length === 0){
                 this._maxHistory = this._requestHistoreCount
-                console.log('Максимальное значение поймано')
             }
 
 
@@ -197,7 +191,6 @@ export default class MainPageStore {
 
         }).catch(({response}) => {
 
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
@@ -206,12 +199,10 @@ export default class MainPageStore {
     topExpensesForTheMonth(){
         return getTopExpensesForTheMonth().then((response) => {
 
-            console.log('pieData ', response)
             this._pieData = [...response.data]
             return Promise.resolve()
         }).catch(({response}) => {
 
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }
@@ -219,11 +210,9 @@ export default class MainPageStore {
     offer(){
         return getOffer().then((response) => {
 
-            console.log('pieData ', response)
             this._offer = response.data
             return Promise.resolve()
         }).catch(({response}) => {
-            console.log('ExpensesByMonthError', response)
             return Promise.reject(response.data.status)
         })
     }

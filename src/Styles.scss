@@ -173,9 +173,13 @@
 .button {
   border-radius: 7px;
   padding: 14px;
+  cursor: pointer;
 
   &_orn {
     background-color: #EA5616;
+    &:hover {
+      background: #C6420C;
+    }
   }
 
   &_blue {
@@ -197,11 +201,15 @@
 
 
 .button_login {
+  cursor: pointer;
   border-radius: 7px;
   padding: 14px;
   width: 280px;
   &_orn {
     background-color: #EA5616;
+    &:hover {
+      background: #C6420C;
+    }
   }
 
   &_blue {

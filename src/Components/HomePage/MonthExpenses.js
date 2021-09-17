@@ -9,7 +9,7 @@ const MonthExpenses = observer(() => {
     const colors = ['#EA5616', '#2C2D84', '#646872']
 
     useEffect(() => {
-        debugger
+
         const getData = () => homePage.topThreeMonthly()
 
         getData()
@@ -18,7 +18,6 @@ const MonthExpenses = observer(() => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    // debugger
                     getData()
                 }).catch(() => {
 

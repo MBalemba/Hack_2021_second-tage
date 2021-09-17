@@ -12,7 +12,6 @@ import './../Styles.scss'
 
 function Input({type, ...props}) {
     const [isPasswordHidden, setPasswordHidden] = useState(false)
-    console.log('input props: ', props);
 
 
     const toggleHiddenPassword = () => {
@@ -54,7 +53,6 @@ const LoginPage = observer( function() {
     const handleSubmit = (e) =>{
 
         e.preventDefault()
-        console.log(e)
 
         login.doAutorizate(name,password )
     }

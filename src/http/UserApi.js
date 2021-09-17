@@ -2,7 +2,6 @@ import {$authHost, $authHostRefresh, $host} from "./index";
 
 
 export const registration = async (obj) => {
-    console.log(process.env.REACT_APP_API_URL)
     const response = await $host.post('user/registration', obj)
 
     return response

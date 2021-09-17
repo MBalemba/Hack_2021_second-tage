@@ -19,13 +19,13 @@ export default class LoginStore {
         return login(name, password)
             .then((response) => {
                 this._isAuthUser = true
-                debugger
+
                 localStorage.setItem('token', response.headers.jwtoken)
                 localStorage.setItem('RefreshToken', response.headers.refreshtoken)
                 return Promise.resolve(response)
             })
             .catch(() => {
-                debugger
+
                 return Promise.reject()
             })
     }

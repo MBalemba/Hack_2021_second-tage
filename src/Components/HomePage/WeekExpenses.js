@@ -41,7 +41,6 @@ const WeekExpenses = observer(() => {
             })
             .catch((status) => {
                 login.checkStatus(status).then(() => {
-                    // debugger
                     getData()
                 }).catch(() => {
 
@@ -51,7 +50,6 @@ const WeekExpenses = observer(() => {
     }, [])
 
 
-    console.log('this._weekExpenses: ', homePage.WeekExpenses)
 
     return (
         <div className={'weekExpenses'}>
@@ -59,7 +57,7 @@ const WeekExpenses = observer(() => {
                 <div onMouseLeave={()=> setSumObj({averageSum: 0,currentSum: 0})} data-tip data-for='happyFace' onMouseMove={(e)=>{console.log(e.clientX)}} className={'weekExpenses__items'}>
                     {
                         averageAmount.map((el, index)=>
-                               <div onMouseEnter={()=> setSumObj({averageSum: el.sum, currentSum: currentAmount[index].sum })} className={'weekExpenses__itemCategoryWrapper'}>
+                               <div key={index} onMouseEnter={()=> setSumObj({averageSum: el.sum, currentSum: currentAmount[index].sum })} className={'weekExpenses__itemCategoryWrapper'}>
                                    <div key={el.data} className={'weekExpenses__itemCategory'}>
                                        <Diagram colorBg={el.sum*100/maxPrice< currentAmount[index].sum*100/maxPrice? '#EA5616' : '#2C2D84'}  color={'rgba(20, 24, 52, 0.09);'} heightSc={currentAmount[index].sum*100/maxPrice}></Diagram>
                                        <Diagram colorBg={'rgba(20, 24, 52, 0.09)'} heightSc={el.sum*100/maxPrice}></Diagram>

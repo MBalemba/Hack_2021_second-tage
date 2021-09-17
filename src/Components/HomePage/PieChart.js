@@ -109,7 +109,7 @@ const PieChart = observer(() => {
 
                 <div data-tip data-for='pie' className={'categories'}>
                     {homePage.PieData.map((el, index) =>
-                        <div onMouseEnter={() => setInfoCategory({index: index })} key={el.category} className={'categories__item'}>
+                        <div onMouseEnter={() => setInfoCategory({index: index })} key={index} className={'categories__item'}>
                             <Div colorDiv={colors[index]} className={'categories__circle'}></Div>
 
                             <div className={'categories__blockText'}>
